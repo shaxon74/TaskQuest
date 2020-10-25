@@ -1,0 +1,29 @@
+body {
+    margin:0px;
+}
+
+.navbar {
+    box-shadow: 0px 4px 4px lightgray;
+}
+
+.menu-list {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.sidebar {
+    float: right;
+    padding-bottom: 100%;
+    background-color: lightblue;
+}
+
+.sidebar-menu {
+    position: sticky;
+    color: red;
+    margin: 10px;
+}
+
+.content {
+    margin: 10px;
+}
