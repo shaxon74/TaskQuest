@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -51,7 +51,5 @@
     <div class="content">
         @yield('content')
     </div>
+    <script type="text/javascript" src="{{ mix('js/app.js') }}" ></script>
 </body>
-
-<!-- Scripts -->
-<script src=" {{ mix('js/main.js') }} "></script>

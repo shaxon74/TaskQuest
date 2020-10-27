@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "hard-source-webpack-plugin": "^0.13.1",
         "sass": "^1.27.0"
     }
 }
