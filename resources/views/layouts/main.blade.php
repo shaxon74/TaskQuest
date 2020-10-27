@@ -22,9 +22,16 @@
         <!-- アプリロゴ -->
         <a class='navbar-brand' href='/home'>TaskQuest</a>
         <!-- メニュー -->
-        @guest
-        @else
-            <div 'navbar-menu'>
+        <div 'navbar-menu'>
+            @guest
+                <ul class='menu-list'>
+                    <li class='menu-item'>
+                        <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                    <li class='menu-item'>
+                        <a href="{{ route('register') }}">{{ __('register') }}</a>
+                    </li>
+            @else
                 <a class='menu-top'>{{ Auth::user()->name }}</a>
                 <ul class='menu-list'>
                     <!-- ログアウトボタン -->
@@ -32,15 +39,15 @@
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
-                        Logout
+                        {{ __('Logout') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             @csrf
                         </form>
                     </li>
                 </ul>
-            </div>
-        @endguest
+            @endguest
+        </div>
     </nav>
     <div class="sidebar">
         <div class="sidebar-menu">
