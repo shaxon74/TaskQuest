@@ -9,4 +9,12 @@
     <original-component></original-component>
     <!-- <example-component></example-component> -->
 </div>
+<ul>
+    @foreach ($tasks as $task)
+        <li>
+            <a>{{ $task->id }} | {{ $task->name }}</a>
+        </li>
+    @endforeach
+</ul>
+
 @endsection
