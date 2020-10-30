@@ -27,3 +27,17 @@ body {
 .content {
     margin: 10px;
 }
+
+.task-list{
+    border: double;
+    margin:5px;
+    th{
+        padding: 5px;
+        border: ridge;
+        text-align: center;
+    }
+    td {
+        padding: 5px;
+        border: ridge;
+    }
+}
