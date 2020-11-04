@@ -14,4 +14,13 @@ class TaskController extends Controller
                  ->get();
         return view('task.index', ['tasks' => $tasks]);
     }
+
+    public function add(Request $resuest) {
+        $task = new Task();
+        $task->name   = $request->name;
+        $task->type   = $request->type;
+        $task->reword = $request->reword;
+        $task->save();
+        return redirect()->route('task.index');
+    }
 }
