@@ -1,43 +1,67 @@
-body {
-    margin:0px;
+.header {
+    width: 100%;
 }
 
-.navbar {
-    box-shadow: 0px 4px 4px lightgray;
+.wrapper {
+    width: 970px;
+    margin: 30px auto 40px;
 }
 
-.menu-list {
-    margin: 0px;
-    padding: 0px;
-    list-style-type: none;
+.content {
+    display: block;
+    float: left;
+    width: 660px;
 }
 
 .sidebar {
     float: right;
-    padding-bottom: 100%;
-    background-color: lightblue;
+    width: 270px;
 }
 
-.sidebar-menu {
-    position: sticky;
-    color: red;
-    margin: 10px;
+.footer {
+    width: 100%;
 }
 
-.content {
-    margin: 10px;
-}
-
-.task-list{
-    border: double;
-    margin:5px;
-    th{
-        padding: 5px;
-        border: ridge;
-        text-align: center;
-    }
-    td {
-        padding: 5px;
-        border: ridge;
-    }
-}
+// body {
+//     margin:0px;
+// }
+//
+// .navbar {
+//     box-shadow: 0px 4px 4px lightgray;
+// }
+//
+// .menu-list {
+//     margin: 0px;
+//     padding: 0px;
+//     list-style-type: none;
+// }
+//
+// .sidebar {
+//     float: right;
+//     padding-bottom: 100%;
+//     background-color: lightblue;
+// }
+//
+// .sidebar-menu {
+//     position: sticky;
+//     color: red;
+//     margin: 10px;
+// }
+//
+// .content {
+//     margin: 10px;
+// }
+//
+// .task-list{
+//     border: double;
+//     margin:5px;
+//     th{
+//         padding: 5px;
+//         border: ridge;
+//         text-align: center;
+//     }
+//     td {
+//         padding: 5px;
+//         border: ridge;
+//     }
+// }

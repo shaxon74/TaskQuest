@@ -5,7 +5,6 @@
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 
-// custom scss
-@import 'main';
+@import 'resources/sass/main.scss';
