@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="header">
     <!-- アプリロゴ -->
     <a class='navbar-brand' href='/home'>TaskQuest</a>
     <!-- メニュー -->

@@ -4,13 +4,16 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
 
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
     @include('include.header')
-    <div class="wrapper">
+    <div class="wrapper clearfix">
         <!-- コンテンツ -->
         <div class="content">
             @yield('content')

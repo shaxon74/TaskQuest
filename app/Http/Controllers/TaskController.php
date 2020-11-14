@@ -9,18 +9,16 @@ use App\Task;
 class TaskController extends Controller
 {
     public function index() {
-        $tasks = Task::where('user_id', Auth::user()->id)
-                 ->orderBy('id', 'asc')
+        $tasks = Task::UserIdEqual( Auth::user()->id)
                  ->get();
         return view('task.index', ['tasks' => $tasks]);
     }
 
-    public function add(Request $resuest) {
+    public function create(Request $request) {
         $task = new Task();
-        $task->name   = $request->name;
-        $task->type   = $request->type;
-        $task->reword = $request->reword;
-        $task->save();
-        return redirect()->route('task.index');
+        $form = $request->all();
+        unset($form['_token']);
+        $task->fill($form)->save();
+        return redirect('/tasks');
     }
 }

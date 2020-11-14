@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home2', 'HomeController@index')->name('home2');
 Route::get('/home', 'UserController@index')->name('home');
 Route::get('/tasks', 'TaskController@index')->name('tasks');
+Route::post('/tasks/create', 'TaskController@create')->name('task_create');
