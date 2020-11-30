@@ -1,10 +1,13 @@
-<nav class="header">
+<nav class="header clearfix">
     <!-- アプリロゴ -->
-    <a class='navbar-brand' href='/home'>TaskQuest</a>
+    <h1 class="logo">
+        <a href='/home'>Task Quest</a>
+    </h1>
+
     <!-- メニュー -->
-    <div 'navbar-menu'>
+    <div class='header-menu'>
         @guest
-            <ul class='menu-list'>
+            <ul>
                 <li class='menu-item'>
                     <a href="{{ route('login') }}">{{ __('Login') }}</a>
                 </li>
@@ -12,8 +15,8 @@
                     <a href="{{ route('register') }}">{{ __('register') }}</a>
                 </li>
         @else
-            <a class='menu-top'>{{ Auth::user()->name }}</a>
-            <ul class='menu-list'>
+            <ul>
+                <li class='menu-item' ><a href="/home">{{ Auth::user()->name }}</a></li>
                 <!-- ログアウトボタン -->
                 <li class='menu-item'>
                     <a href="{{ route('logout') }}"
