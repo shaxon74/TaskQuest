@@ -16,12 +16,10 @@
     @include('include.header')
     <div class="wrapper clearfix">
         <!-- コンテンツ -->
-        <div class="content">
+        <div class="main">
             @yield('content')
         </div>
-        @auth
-            @include('include.sidebar')
-        @endauth
+        @include('include.sidemenu')
     </div>
     <script type="text/javascript" src="{{ mix('js/app.js') }}" ></script>
     @include('include.footer')
