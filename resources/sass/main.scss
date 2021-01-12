@@ -250,6 +250,22 @@ a:link, a:visited, a:hover, a:active {
         float: right;
         width: 270px;
     }
+    .ranking {
+        margin-bottom: 30px;
+        padding: 0;
+        list-style-type: none;
+        .ranking-item {
+            margin-top: 15px;
+            a {
+                display: block;
+                font-size: 0;
+                transition: opacity 0.15s;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
 }
 
 
