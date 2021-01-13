@@ -5,30 +5,30 @@
     </h1>
 
     <!-- メニュー -->
-    <div class='header-menu'>
+    <ul class='header-menu'>
         @guest
-            <ul>
-                <li class='menu-item'>
-                    <a href="{{ route('login') }}">{{ __('Login') }}</a>
-                </li>
-                <li class='menu-item'>
-                    <a href="{{ route('register') }}">{{ __('register') }}</a>
-                </li>
-        @else
-            <ul>
-                <li class='menu-item' ><a href="/home">{{ Auth::user()->name }}</a></li>
-                <!-- ログアウトボタン -->
-                <li class='menu-item'>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
+            <!-- ログイン -->
+            <li class='menu-item'>
+                <a href="{{ route('login') }}">{{ __('Login') }}</a>
+            </li><!--
+            <新規登録>
+            --><li class='menu-item'>
+                <a href="{{ route('register') }}">{{ __('register') }}</a>
+            </li>
+　        　@else
+            <!-- ユーザーページ -->
+            <li class='menu-item' ><a href="/home">{{ Auth::user()->name }}</a></li><!--
+            <ログアウトボタン>
+            --><li class='menu-item'>
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                </form>
+            </li>
         @endguest
-    </div>
+    </ul>
 </nav>

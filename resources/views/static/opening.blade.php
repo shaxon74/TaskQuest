@@ -2,9 +2,9 @@
 
 @section('content')
 
-<section class="overview">
-    <h2 class="hidden">OVERVIEW</h2>
-    <a href="#" class="overview clearfix">
+<section class="introduction">
+    <h2 class="hidden">INTRODUCTION</h2>
+    <a href="#" class="introduction clearfix">
         <img class="image" src="../images/hot-topic.jpg" alt="コーディング画面" />
         <div class="content">
             <h3 class='title'>人生は、ゲームだ。</h3>

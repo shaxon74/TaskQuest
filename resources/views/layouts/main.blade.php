@@ -16,7 +16,7 @@
     @include('include.header')
     <div class="wrapper clearfix">
         <!-- コンテンツ -->
-        <div class="main">
+        <div class="content">
             @yield('content')
         </div>
         @include('include.sidemenu')
