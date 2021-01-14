@@ -4,18 +4,17 @@
 
 <section class="introduction">
     <h2 class="hidden">INTRODUCTION</h2>
-    <a href="#" class="introduction clearfix">
-        <img class="image" src="../images/hot-topic.jpg" alt="コーディング画面" />
-        <div class="content">
+    <a class="content clearfix">
+        <div class="text">
             <h3 class='title'>人生は、ゲームだ。</h3>
             <p class="desc">日々のタスクや目標をモンスターとして登録し、
                             どんどん倒して自分にご褒美をプレゼントしよう！</p>
-            <time class="date" datetime="2020-12-08">Upedate: 2020.12.08 TUE</time>
         </div>
+        <img class="image" src="../images/hot-topic.jpg" alt="コーディング画面" />
     </a>
 </section>
 
-<section class="news">
+<!-- <section class="news">
     <h2 class="heading">NEWS</h2>
     <ul class="scroll-list">
         <li class="scroll-item">
@@ -53,6 +52,6 @@
             <img class="image" src="./images/article.jpg" alt="コーディング画面" />
         </a>
     </div>
-</section>
+</section> -->
 
 @endsection
