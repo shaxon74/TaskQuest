@@ -9,11 +9,11 @@
         @guest
             <!-- ログイン -->
             <li class='menu-item'>
-                <a href="{{ route('login') }}">{{ __('Login') }}</a>
+                <a href="{{ route('login') }}">LOGIN</a>
             </li><!--
             <新規登録>
             --><li class='menu-item'>
-                <a href="{{ route('register') }}">{{ __('register') }}</a>
+                <a href="{{ route('register') }}">REGISTER</a>
             </li>
 　        　@else
             <!-- ユーザーページ -->
@@ -23,9 +23,9 @@
                 <a href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
+                    LOGOUT
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                <form id="logout-form" name = "logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf
                 </form>
             </li>

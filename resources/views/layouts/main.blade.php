@@ -4,12 +4,11 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
 
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    <!-- CSRFトークン -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <!-- スタイルシート -->
+    <link rel="stylesheet"　href="{{ mix('css/app.css') }}">
 </head>
 
 <body>
@@ -21,7 +20,7 @@
         </div>
         <!-- @include('include.sidemenu') -->
     </div>
-    <script type="text/javascript" src="{{ mix('js/app.js') }}" ></script>
     @include('include.footer')
+    <script src=" {{ mix('js/app.js') }} "></script>
 </body>
 </html>
