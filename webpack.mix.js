@@ -11,13 +11,14 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.webpackConfig({
-    devServer: {
-        proxy: {
-            '*':'http://localhost:80'
-        }
-    }
-})
-
-mix.js('resources/js/app.js', 'public/js');
-mix.sass('resources/sass/app.scss', 'public/css');
+mix
+    // .webpackConfig({
+    //     devServer: {
+    //         proxy: {
+    //             '*':'http://localhost:80'
+    //         }
+    //     }
+    // })
+    .js('resources/js/app.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+;

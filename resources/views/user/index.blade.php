@@ -3,6 +3,28 @@
 @section('content')
 
 <section class="task-list">
+    <h2>map</h2>
+    <div class="field">
+        <div class="sporn-area">
+            <div class="hero"></div>
+            <div class="day1">
+                <div class="monster"></div>
+            </div>
+            <div class="day1">
+                <div class="monster"></div>
+            </div>
+            <div class="day1">
+                <div class="monster"></div>
+            </div>
+            <div class="day1">
+                <div class="monster"></div>
+            </div>
+            <div class="day1">
+                <div class="monster"></div>
+            </div>
+        </div>
+    </div>
+
     <h2>タスク一覧</h2>
     <table class="task-list">
         <tr><th>name</th><th>type</th>
