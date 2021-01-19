@@ -13,12 +13,8 @@
 
 <body>
     @include('include.header')
-    <div class="wrapper clearfix">
-        <!-- コンテンツ -->
-        <div class="main">
-            @yield('content')
-        </div>
-        <!-- @include('include.sidemenu') -->
+    <div class="main">
+        @yield('content')
     </div>
     @include('include.footer')
     <script src=" {{ mix('js/app.js') }} "></script>

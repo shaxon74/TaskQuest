@@ -2,29 +2,14 @@
 
 @section('content')
 
-<section class="task-list">
-    <h2>map</h2>
-    <div class="field">
-        <div class="sporn-area">
-            <div class="hero"></div>
-            <div class="day1">
-                <div class="monster"></div>
-            </div>
-            <div class="day1">
-                <div class="monster"></div>
-            </div>
-            <div class="day1">
-                <div class="monster"></div>
-            </div>
-            <div class="day1">
-                <div class="monster"></div>
-            </div>
-            <div class="day1">
-                <div class="monster"></div>
-            </div>
-        </div>
+<section class="field-section">
+    <h2>Field</h2>
+    <div id='app'>
+        <field-component :testvalue= '2'></field-component>
     </div>
 
+
+<section class="task-list-section">
     <h2>タスク一覧</h2>
     <table class="task-list">
         <tr><th>name</th><th>type</th>
@@ -40,7 +25,7 @@
     </table>
 </section>
 
-<section class="vue-test">
+<section class="vue-test-section">
     <h2>Vue.jsテスト</h2>
     <div id="app">
         <original-component></original-component>
