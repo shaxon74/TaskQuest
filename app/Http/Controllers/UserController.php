@@ -11,8 +11,7 @@ class UserController extends Controller
 {
     public function index() {
 
-        $tasks = Task::where('user_id', Auth::user()->id)
-                ->orderBy('id', 'asc')
+        $tasks = Task::UserIdEqual(Auth::user()->id)
                 ->get();
         return view('user.index', ['tasks' => $tasks]);
     }

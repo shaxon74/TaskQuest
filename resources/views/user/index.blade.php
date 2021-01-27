@@ -5,7 +5,7 @@
 <section class="field-section">
     <h2>Field</h2>
     <div id='app'>
-        <field-component :testvalue= '2'></field-component>
+        <field-component></field-component>
     </div>
 
 

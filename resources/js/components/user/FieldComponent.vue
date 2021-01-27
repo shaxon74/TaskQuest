@@ -8,13 +8,8 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
 
 <template>
     <div class="field">
-        <p class="test">testvalue={{ testvalue }}</p>
         <div class="sporn-area">
             <div class="hero"></div>
-            <day-component></day-component>
-            <day-component></day-component>
-            <day-component></day-component>
-            <day-component></day-component>
             <day-component></day-component>
         </div>
     </div>
@@ -22,9 +17,11 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
 
 <script>
 export default {
-    props: {
-       testvalue: String
-   }
+    data: function(){
+        return {
+            days_left: 0 + 'px'
+        }
+    }
 }
 </script>
 
