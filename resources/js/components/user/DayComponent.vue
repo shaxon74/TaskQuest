@@ -27,35 +27,51 @@ export default {
         },
         monsters: function(tasks){
             //日付処理が余りにもクソ面倒(月跨ぎのときは特に)
-            // ->moment.jsとかいうjsのライブラリが便利そう
-            var today = new Date;
-            var monsters = {};
-            var date_current = new Date;
-            var limit_date = new Date;
-            var monster = ["id", "name", "date", "reword"];
-            console.log("days_length: " + this.days_length);
-            console.log(this.tasks);
+            // ->day.jsとかいうjsのライブラリが便利そう
+            var dayjs = require('dayjs');
+            var today = dayjs();
+            var monsters = [];
+            var date_current = dayjs();
+            var date_limit = dayjs();
+            var monster = {};
+            // console.log( 'today: ' + today.format('YYYY/MM/DD') );
+            // console.log('days_length: ' + this.days_length);
+            // console.log(this.tasks);
             for(var cnt = 0; cnt < this.days_length; cnt++) {
-                date_current.setDate(today.getDate() + cnt);
-                console.log(date_current);
-                //type=1だったら無条件でmonster作成。
-                //type=2だったら週末のみmonster作成。
-                //type=3だったら月末のみmonster作成。
+                date_current = today.add(cnt, 'day');
+                // console.log( 'date_current: ' + date_current.format('YYYY/MM/DD') );
                 this.tasks.forEach(function( task ) {
+                    // console.log( 'task.type: ' + task.type );
                     switch(task.type){
                         case 1:
-                            limit_date.setDate( date_current.getDate() );
+                            console.log( 'task.type: ' + task.type );
+                            date_limit = date_current;
+                            break;
                         case 2:
-                            limit_date.setDate( date_current.getDate() + (7 - date_current.getDay()) );
+                            console.log( 'task.type: ' + task.type );
+                            date_current.day() == 0 ?
+                                date_limit = date_current :
+                                date_limit = date_current.add( 7 - date_current.day(), 'day' );
+                            break;
                         case 3:
-                        //月末日付をlimit_dateに入れる。
+                            console.log( 'task.type: ' + task.type );
+                            date_limit = date_current.date(1).add(1, 'month' ).subtract(1, 'day');
+                            break;
                     }
-                    monster.name   = task.name;
-                    monster.date   = limit_date;
-                    monster.reword = task.reword;
-                    // console.log(monster);
+                    console.log( 'date_limit: ' + date_limit.format('YYYY/MM/DD') );
+                    if( date_limit.isSame(date_current) ){
+                        monster.name       = task.name;
+                        monster.date_limit = date_limit;
+                        monster.reword     = task.reword;
+                        console.log(monster.name);
+                        console.log(monster.date_limit);
+                        console.log(monster.reword);
+                        monsters.push(monster);
+                        // console.log(dayjs(monster.date_limit).format('YYYY/MM/DD'));
+                    }
                 });
             }
+            console.log(monsters);
         }
     }
 }
