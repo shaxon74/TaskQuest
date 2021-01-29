@@ -9,7 +9,8 @@
         // ロゴ画像サイズに合わせる。
         width: 224px;
         height: 56px;
-        background-image:url(resources\images\logo.png);
+        background-image: url('/images/logo.png');
+        background-size:  cover;
         // 要素を中央揃え
         margin: auto;
         // テキストを非表示
