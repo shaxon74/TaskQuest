@@ -8,7 +8,8 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
 
 <template>
     <div class="field">
-        <div class="sporn-area">
+        <div class="sporn-area"
+         v-bind:style="days_left">
             <div class="hero"></div>
             <day-component></day-component>
         </div>
@@ -19,7 +20,7 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
 export default {
     data: function(){
         return {
-            days_left: 0 + 'px'
+            days_left: 'width: ' + 3000 + 'px',
         }
     }
 }
@@ -31,7 +32,6 @@ export default {
     width: 100%;
     overflow-x: scroll;
     .sporn-area {
-        width: 3000px;
         height: auto;
         background-color: #386;
         display: flex;
