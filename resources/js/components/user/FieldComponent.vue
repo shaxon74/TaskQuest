@@ -8,11 +8,17 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
 
 <template>
     <div class="field">
-        <div class="my-area" :style="this.width_my_area">
+        <div class="my-area" :style="this.widthMyArea">
             <div class="hero">
+                <button v-on:click="this.openMyMenu">open</button>
+                <MyMenu-component
+                    :style="visibility"
+                    :is-active="this.isActive"
+                    v-on:myMenuIsClosed="this.closeMyMenu">
+                </MyMenu-component>
             </div>
         </div>
-        <div class="monsters-area" :style="this.width_monsters_area">
+        <div class="monsters-area" :style="this.widthMonstersArea">
             <TaskMonsters-component></TaskMonsters-component>
         </div>
     </div>
@@ -23,13 +29,31 @@ export default {
     data: function(){
         return {
             width: 150,
-            width_my_area: '',
-            width_monsters_area: ''
+            widthMyArea: '',
+            widthMonstersArea: '',
+            isActive: false,
+            visibility: 'visibility: visible;'
         }
     },
     mounted: function(){
-        this.width_my_area = 'width: ' + this.width + 'px;',
-        this.width_monsters_area = 'width: calc(100% - ' + this.width + 'px);'
+        this.widthMyArea = 'width: ' + this.width + 'px;',
+        this.widthMonstersArea = 'width: calc(100% - ' + this.width + 'px);'
+    },
+    methods: {
+        closeMyMenu: function(){
+            this.isActive =false;
+            this.switchMyMenu(this.isActive);
+        },
+        openMyMenu: function(){
+            this.isActive =true;
+            this.switchMyMenu(this.isActive);
+        },
+        switchMyMenu: function(isActive){
+            isActive ?
+            this.visibility = 'visibility: visible; ' :
+            this.visibility = 'visibility: hidden; '
+            console.log(this.visibility);
+        }
     }
 }
 </script>
@@ -51,8 +75,7 @@ export default {
             width: 50px;
             height: 50px;
             background-color: #368;
-            // 位置決めのマージン
-            // margin: 50px 20px 0 50px;
+            position: relative;
         }
     }
     .sporn-area {

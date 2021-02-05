@@ -24,6 +24,7 @@ Vue.component('original-component',     require('./components/OriginalComponent.
 Vue.component('field-component',        require('./components/user/FieldComponent.vue').default);
 Vue.component('TaskMonsters-component', require('./components/user/TaskMonstersComponent.vue').default);
 Vue.component('monster-component',      require('./components/user/MonsterComponent.vue').default);
+Vue.component('MyMenu-component',       require('./components/user/MyMenuComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
