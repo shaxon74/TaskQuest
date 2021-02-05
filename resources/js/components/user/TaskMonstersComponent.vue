@@ -1,13 +1,13 @@
 <template>
-    <div class="days">
-        <div class="date">
-            <monster-component></monster-component>
-        </div>
-        <ul class="dbg">
-            <li v-for="monster in monsters">{{ monster }}</li>
-        </ul>
+    <div class="TaskMonsters" style="width: 3000px;">
+        <monster-component
+            v-for="monster in monsters"
+            :key=monster.id
+            :name=monster.id
+            :monster="monster">
+        </monster-component>
         <!-- <ul class="dbg">
-            <li v-for="task in tasks">{{ task }}</li>
+            <li v-for="monster in monsters">{{ monster }}</li>
         </ul> -->
     </div>
 </template>
@@ -27,29 +27,36 @@ export default {
         create_monsters: function(){
             // Axiosでレコードを取出す。
             axios.get('/tasks_axios').then(response => {
-                var tasks = response.data;
-                var dayjs = require('dayjs');   // day.jsライブラリの呼出し
-                var today = dayjs();
-                var date_current = dayjs();     // for文でターゲットとしている日付
-                var date_limit = dayjs();       // task.typeから判定したタスク期限
+                let tasks = response.data;
+                let dayjs = require('dayjs');   // day.jsライブラリの呼出し
+                let today = dayjs();
+                let date_current = dayjs();     // for文でターゲットとしている日付
+                let date_limit = dayjs();       // task.typeから判定したタスク期限
+                let id = 0;
+                let num_perday;
                 // 表示する日付長だけmonsterデータを作成する。
-                for(var cnt = 0; cnt < this.days_length; cnt++) {
+                for(let cnt = 0; cnt < this.days_length; cnt++) {
+                    num_perday = 0;
                     date_current = today.add(cnt, 'day');
                     tasks.forEach( task => {
                         date_limit = this.func_date_limit(task.type, date_current);
                         // taskからmonster連想配列を生成しmonsters配列にpushする。
                         if( date_limit.isSame(date_current) ){
                             this.monsters.push({
+                                'id':         id,
                                 'name':       task.name,
                                 'date_limit': date_limit,
+                                'num_perday': num_perday,
                                 'reword':     task.reword});
-                            }   // endif
-                        }); // endforeach
-                    }   // endfor
+                            id++;
+                            num_perday++;
+                        }   // endif
+                    }); // endforeach
+                }   // endfor
             }); // endaxios.get
         },  // endfunction
         func_date_limit: function(type, date_current) {
-            var date_limit_ret;
+            let date_limit_ret;
             switch(type){
                 case 1:
                 date_limit_ret = date_current;
@@ -70,18 +77,11 @@ export default {
 </script>
 
 <style lang="scss">
-    .days {
+    .TaskMonsters {
         position:relative;
-        width: 100%;
+        // width: 100%;
         height: 200px;
         background-color: #295;
-    }
-    .date {
-        position: absolute;
-        left: 30px;
-        width: 100px;
-        height: 200px;
-        background-color: #265;
     }
     .dbg {
         background: #814;

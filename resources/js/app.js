@@ -19,11 +19,11 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component',  require('./components/ExampleComponent.vue').default);
-Vue.component('original-component', require('./components/OriginalComponent.vue').default);
-Vue.component('field-component',    require('./components/user/FieldComponent.vue').default);
-Vue.component('day-component',      require('./components/user/DayComponent.vue').default);
-Vue.component('monster-component',  require('./components/user/MonsterComponent.vue').default);
+Vue.component('example-component',      require('./components/ExampleComponent.vue').default);
+Vue.component('original-component',     require('./components/OriginalComponent.vue').default);
+Vue.component('field-component',        require('./components/user/FieldComponent.vue').default);
+Vue.component('TaskMonsters-component', require('./components/user/TaskMonstersComponent.vue').default);
+Vue.component('monster-component',      require('./components/user/MonsterComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
