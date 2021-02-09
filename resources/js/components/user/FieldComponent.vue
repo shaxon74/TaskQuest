@@ -10,11 +10,8 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
     <div class="field">
         <div class="my-area" :style="this.widthMyArea">
             <div class="hero">
-                <button v-on:click="this.openMyMenu">open</button>
-                <MyMenu-component
-                    :style="visibility"
-                    :is-active="this.isActive"
-                    v-on:myMenuIsClosed="this.closeMyMenu">
+                <button v-on:click="this.switchMyMenu">open</button>
+                <MyMenu-component ref="MyMenu">
                 </MyMenu-component>
             </div>
         </div>
@@ -28,11 +25,9 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
 export default {
     data: function(){
         return {
-            width: 150,
+            width: 250,
             widthMyArea: '',
             widthMonstersArea: '',
-            isActive: false,
-            visibility: 'visibility: visible;'
         }
     },
     mounted: function(){
@@ -40,19 +35,8 @@ export default {
         this.widthMonstersArea = 'width: calc(100% - ' + this.width + 'px);'
     },
     methods: {
-        closeMyMenu: function(){
-            this.isActive =false;
-            this.switchMyMenu(this.isActive);
-        },
-        openMyMenu: function(){
-            this.isActive =true;
-            this.switchMyMenu(this.isActive);
-        },
-        switchMyMenu: function(isActive){
-            isActive ?
-            this.visibility = 'visibility: visible; ' :
-            this.visibility = 'visibility: hidden; '
-            console.log(this.visibility);
+        switchMyMenu: function(){
+            this.$refs.MyMenu.switch();
         }
     }
 }
@@ -65,13 +49,13 @@ export default {
     overflow-x: scroll;
     display: flex;
     .my-area {
-        height: 200px;
+        height: 250px;
         position: relative;
         background-color: #944;
         .hero {
             position: absolute;
-            top: 80px;
-            left: 30px;
+            top: 150px;
+            left: 70px;
             width: 50px;
             height: 50px;
             background-color: #368;
