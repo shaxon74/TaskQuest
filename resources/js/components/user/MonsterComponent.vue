@@ -1,5 +1,8 @@
 <template>
     <div class="monster" :style="style">
+        <button v-on:click="this.switchMonsterMenu">open</button>
+        <monstermenu-component ref="monsterMenu">
+        </monstermenu-component>
     </div>
 </template>
 
@@ -17,15 +20,18 @@ export default {
     methods: {
         setStyle: function(){
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
-            let positionLeft = 20
+            let positionLeft = 40
                 + this.monster.dateLimit.diff(dayjs().subtract(1,'day'), 'day') * 100
                 + Math.floor((this.monster.numPerDay)/5, 0) * 20
-                + this.monster.numPerDay * 5;
-            let positionTop = 0
-                + (4 - this.monster.numPerDay % 5 ) * 40;
+                - this.monster.numPerDay * 5;
+            let positionTop = 100
+                + this.monster.numPerDay % 5  * 40;
             let styleLeft = 'left: ' + positionLeft + 'px;';
             let styleTop  = 'top: '  + positionTop  + 'px;';
             this.style = styleLeft + styleTop;
+        },
+        switchMonsterMenu: function(){
+            this.$refs.monsterMenu.switch();
         }
     }
 }

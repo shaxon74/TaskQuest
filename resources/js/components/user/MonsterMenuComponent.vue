@@ -1,5 +1,5 @@
 <template>
-    <div class="my-menu" :style="visibility">
+    <div class="monster-menu" :style="visibility">
         <button v-on:click="this.switch" class="button-close">
             <div class="cross"></div>
         </button>
@@ -15,9 +15,6 @@ export default {
             visibility: 'visibility: hidden;'
         }
     },
-    mounted: function(){
-        console.log('MyMenu mounted');
-    },
     methods: {
         switch: function() {
             this.is_active = !this.is_active;
@@ -32,8 +29,8 @@ export default {
 </script>
 
 <style lang="scss">
-    .my-menu {
-        position: absolute;
+    .monster-menu {
+        position: relative;
         top: -100px;
         left: 50px;
         width: 200px;

@@ -1,13 +1,10 @@
 <template>
-    <div class="TaskMonsters" style="width: 1000px;">
+    <div class="TaskMonsters" style="width: 1200px;">
         <monster-component
             v-for="monster in monsters"
             :key=monster.key
             :monster="monster">
         </monster-component>
-        <!-- <ul class="dbg">
-            <li v-for="monster in monsters">{{ monster }}</li>
-        </ul> -->
     </div>
 </template>
 
@@ -81,8 +78,7 @@ export default {
 <style lang="scss">
     .TaskMonsters {
         position:relative;
-        // width: 100%;
-        height: 100%;
+        height: 350px;
         background-color: #295;
     }
     .dbg {

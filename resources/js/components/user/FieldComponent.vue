@@ -11,12 +11,12 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
         <div class="my-area" :style="this.widthMyArea">
             <div class="hero">
                 <button v-on:click="this.switchMyMenu">open</button>
-                <MyMenu-component ref="MyMenu">
-                </MyMenu-component>
+                <mymenu-component ref="MyMenu">
+                </mymenu-component>
             </div>
         </div>
         <div class="monsters-area" :style="this.widthMonstersArea">
-            <TaskMonsters-component></TaskMonsters-component>
+            <taskmonsters-component></taskmonsters-component>
         </div>
     </div>
 </template>
@@ -46,24 +46,22 @@ export default {
 .field {
     width: 100%;
     height: auto;
-    overflow-x: scroll;
+    overflow: scroll;
     display: flex;
     .my-area {
-        height: 250px;
         position: relative;
         background-color: #944;
         .hero {
             position: absolute;
-            top: 150px;
-            left: 70px;
+            top: 200px;
+            left: 150px;
             width: 50px;
             height: 50px;
             background-color: #368;
             position: relative;
         }
     }
-    .sporn-area {
-        height: auto;
+    .monsters-area {
         background-color: #386;
     }
 }
