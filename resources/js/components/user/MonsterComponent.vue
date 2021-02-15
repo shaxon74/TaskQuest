@@ -1,23 +1,41 @@
 <template>
-    <div class="monster">
+    <div class="monster" :style="style">
     </div>
 </template>
 
 <script>
-    export default {
-        props: ['monster'],
-        data: function(){
-            return {
-            }
+export default {
+    props: ['monster'],
+    data: function(){
+        return {
+            style: ''
+        }
+    },
+    mounted: function(){
+        this.setStyle();
+    },
+    methods: {
+        setStyle: function(){
+            let dayjs = require('dayjs');   // day.jsライブラリの呼出し
+            let positionLeft = 20
+                + this.monster.dateLimit.diff(dayjs().subtract(1,'day'), 'day') * 100
+                + Math.floor((this.monster.numPerDay)/5, 0) * 20
+                + this.monster.numPerDay * 5;
+            let positionTop = 0
+                + (4 - this.monster.numPerDay % 5 ) * 40;
+            let styleLeft = 'left: ' + positionLeft + 'px;';
+            let styleTop  = 'top: '  + positionTop  + 'px;';
+            this.style = styleLeft + styleTop;
         }
     }
+}
 </script>
 
 <style lang="scss">
     .monster {
         position: absolute;
-        top: 20px;
-        left: 20px;
+        top: 0px;
+        left: 0px;
         width: 50px;
         height: 50px;
         background-color: #863;

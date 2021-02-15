@@ -17,7 +17,6 @@ export default {
     },
     mounted: function(){
         console.log('MyMenu mounted');
-        this.switchMyMenu(this.is_active);
     },
     methods: {
         switch: function() {
@@ -26,9 +25,8 @@ export default {
             this.switchStyle(this.is_active);
         },
         switchStyle: function(isActive){
-            isActive ?
-            this.visibility = 'visibility: visible; ' :
-            this.visibility = 'visibility: hidden; '
+            this.visibility = isActive ?
+                'visibility: visible; ' : 'visibility: hidden; '
             console.log(this.visibility);
         }
     }
