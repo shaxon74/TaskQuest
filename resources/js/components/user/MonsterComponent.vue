@@ -1,7 +1,9 @@
 <template>
     <div class="monster" :style="style">
         <button v-on:click="this.switchMonsterMenu">open</button>
-        <monstermenu-component ref="monsterMenu">
+        <monstermenu-component
+            ref="monsterMenu"
+            :monster="monster">
         </monstermenu-component>
     </div>
 </template>

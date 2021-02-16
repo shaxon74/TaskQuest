@@ -23,3 +23,5 @@ Route::post('/tasks/create', 'TaskController@create')->name('task_create');
 Route::get('/tasks_axios',function(){
 	return App\Task::UserIdEqual(Auth::user()->id)->get();
 });
+
+Route::post('/tasks_axios', 'AxiosTasksController@post');

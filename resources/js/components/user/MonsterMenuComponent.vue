@@ -3,16 +3,24 @@
         <button v-on:click="this.switch" class="button-close">
             <div class="cross"></div>
         </button>
+        <button v-on:click="this.switchDone">
+            Done
+        </button>
         <p>Activated!!</p>
     </div>
 </template>
 
 <script>
 export default {
+    props: ['monster'],
     data: function(){
         return {
             is_active: false,
-            visibility: 'visibility: hidden;'
+            visibility: 'visibility: hidden;',
+            axios_data: {
+                tasks_id: this.monster.id,
+                date_limit: this.monster.dateLimit
+            }
         }
     },
     methods: {
@@ -23,6 +31,14 @@ export default {
         switchStyle: function(isActive){
             this.visibility = isActive ?
                 'visibility: visible; ' : 'visibility: hidden; '
+        },
+        switchDone: function() {
+                console.log(this.axios_data);
+            axios.post('/tasks_axios', this.axios_data).then(response => {
+                console.log('switchDone: ' + this.monster.name);
+            }).catch(error => {
+                console.log('hoge' + error);
+            });
         }
     }
 }
