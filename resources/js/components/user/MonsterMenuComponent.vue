@@ -1,43 +1,44 @@
 <template>
     <div class="monster-menu" :style="visibility">
-        <button v-on:click="this.switch" class="button-close">
+        <button v-on:click="this.switchVisibility" class="button-close">
             <div class="cross"></div>
         </button>
         <button v-on:click="this.switchDone">
             Done
         </button>
-        <p>Activated!!</p>
+        <p>Name: {{ this.monster.name }}</p>
+        <p>reword: {{ this.monster.reword }}</p>
+        <p>dateLimit: {{ this.monster.dateLimit }}</p>
+        <p>done: {{ this.doneTask.is_done }}</p>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['monster'],
+    props: ['monster', 'doneTask'],
     data: function(){
         return {
             is_active: false,
             visibility: 'visibility: hidden;',
             axios_data: {
                 tasks_id: this.monster.id,
-                date_limit: this.monster.dateLimit
+                date_limit: this.monster.dateLimit.format('YYYY-MM-DD')
             }
         }
     },
+    mounted: function(){
+        // this.getStatus();
+    },
     methods: {
-        switch: function() {
+        switchVisibility: function() {
             this.is_active = !this.is_active;
-            this.switchStyle(this.is_active);
-        },
-        switchStyle: function(isActive){
-            this.visibility = isActive ?
-                'visibility: visible; ' : 'visibility: hidden; '
+            this.visibility = this.is_active ?
+            'visibility: visible;' : 'visibility: hidden;'
         },
         switchDone: function() {
-                console.log(this.axios_data);
-            axios.post('/tasks_axios', this.axios_data).then(response => {
-                console.log('switchDone: ' + this.monster.name);
+            axios.post('/axios/done_task', this.axios_data).then(response => {
             }).catch(error => {
-                console.log('hoge' + error);
+                console.log(error);
             });
         }
     }

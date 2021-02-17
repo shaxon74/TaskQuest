@@ -16,4 +16,17 @@ class DoneTask extends Model
         'is_done' => false,
     ];
 
+    //指定のユーザーIDをもつタスクを昇順でスコープする。
+    public function scopeUserIdEqual($query, $str) {
+        return $query->where('user_id', $str);
+    }
+
+    //指定のユーザーIDをもつタスクを昇順でスコープする。
+    public function scopeUserTaskDateEqual($query, $data) {
+        return $query->where([
+            'user_id'   => $data['user_id'],
+            'tasks_id'  => $data['tasks_id'],
+            'date_limit'=> $data['date_limit'],
+        ]);
+    }
 }

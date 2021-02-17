@@ -3,21 +3,24 @@
         <button v-on:click="this.switchMonsterMenu">open</button>
         <monstermenu-component
             ref="monsterMenu"
-            :monster="monster">
+            :monster="monster"
+            :doneTask="doneTask">
         </monstermenu-component>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['monster'],
+    props: ['monster', 'doneTasks'],
     data: function(){
         return {
-            style: ''
+            style: '',
+            doneTask: []
         }
     },
     mounted: function(){
         this.setStyle();
+        this.setDoneTask();
     },
     methods: {
         setStyle: function(){
@@ -33,7 +36,17 @@ export default {
             this.style = styleLeft + styleTop;
         },
         switchMonsterMenu: function(){
-            this.$refs.monsterMenu.switch();
+            this.$refs.monsterMenu.switchVisibility();
+        },
+        setDoneTask: function(){
+            // console.log(this.doneTasks[0][1]);
+            // console.log('id: ' + this.monster.id);
+            this.doneTask = this.doneTasks.filter(item =>
+                // item.date_limit === this.monster.dateLimit
+                // &&
+                item.tasks_id === 1
+            );
+            // console.log(this.doneTask);
         }
     }
 }

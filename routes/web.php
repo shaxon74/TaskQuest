@@ -20,8 +20,13 @@ Route::get('/home', 'UserController@index')->name('home');
 Route::get('/tasks', 'TaskController@index')->name('tasks');
 Route::post('/tasks/create', 'TaskController@create')->name('task_create');
 
-Route::get('/tasks_axios',function(){
+Route::get('/axios/tasks',function(){
 	return App\Task::UserIdEqual(Auth::user()->id)->get();
 });
 
-Route::post('/tasks_axios', 'AxiosTasksController@post');
+Route::get('/axios/done_tasks',function(){
+	return App\DoneTask::UserIdEqual(Auth::user()->id)->get();
+});
+
+Route::get('/axios/done_task', 'AxiosTasksController@get');
+Route::post('/axios/done_task', 'AxiosTasksController@post');

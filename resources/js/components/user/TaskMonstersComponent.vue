@@ -1,10 +1,11 @@
 <template>
     <div class="TaskMonsters" style="width: 1200px;">
-        <monster-component
+        <!-- <monster-component
             v-for="monster in monsters"
             :key=monster.key
-            :monster="monster">
-        </monster-component>
+            :monster="monster"
+            :doneTasks="doneTasks">
+        </monster-component> -->
     </div>
 </template>
 
@@ -13,16 +14,21 @@ export default {
     data: function(){
         return {
             monsters: [],
+            doneTasks: [],
             daysLength: 10,
         }
     },
     mounted: function(){
-        this.create_monsters();
+        this.createMonsters();
+        this.getDoneTasks();
+        // this.sleep(5000);
+        console.log(this.monsters);
+        console.log(this.doneTasks);
     },
     methods: {
-        create_monsters: function(){
+        createMonsters: function(){
             // Axiosでレコードを取出す。
-            axios.get('/tasks_axios').then(response => {
+            axios.get('/axios/tasks').then(response => {
                 let tasks = response.data;
                 let dayjs = require('dayjs');   // day.jsライブラリの呼出し
                 let today = dayjs();
@@ -70,7 +76,25 @@ export default {
                 break;
             }
             return dateLimit_ret;
-        }   // endfunction
+        },   // endfunction
+        getDoneTasks: function() {
+            axios.get('/axios/done_tasks').then(response => {
+                // console.log('start: getDoneTasks');
+                // console.log(response.data);
+                this.doneTasks = response.data;
+                // console.log(this.doneTasks);
+                // console.log('end: getDoneTasks');
+            });
+        },
+        // getDoneTasks: function() {
+        //     const res = await axios.get('/axios/done_tasks');
+        //     console.log(res.data);
+        // },
+        sleep: function(waitMsec) {
+            var startMsec = new Date();
+            // 指定ミリ秒間だけループさせる（CPUは常にビジー状態）
+            while (new Date() - startMsec < waitMsec);
+        }
     }   // endmethods
 }
 </script>
