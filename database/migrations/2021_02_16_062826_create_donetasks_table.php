@@ -16,7 +16,7 @@ class CreateDonetasksTable extends Migration
         Schema::create('done_tasks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->string('tasks_id');
+            $table->integer('task_id');
             $table->DateTime('date_limit');
             $table->boolean('is_done');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateDonetasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('donetasks');
+        Schema::dropIfExists('done_tasks');
     }
 }

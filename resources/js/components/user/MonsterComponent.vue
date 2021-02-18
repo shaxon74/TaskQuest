@@ -3,25 +3,31 @@
         <button v-on:click="this.switchMonsterMenu">open</button>
         <monstermenu-component
             ref="monsterMenu"
-            :monster="monster"
-            :doneTask="doneTask">
+            :monster="monster">
         </monstermenu-component>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['monster', 'doneTasks'],
+    props: ['monster'],
     data: function(){
         return {
             style: '',
-            doneTask: []
         }
     },
     mounted: function(){
         this.setStyle();
-        this.setDoneTask();
+        console.log('Monster mounted!');
     },
+    // beforeUpdate: function(){
+    //     // this.setStyle();
+    //     // this.setDoneTask();
+    //     console.log('Monster beforeUpdate!');
+    // },
+    // updated: function(){
+    //     console.log('Monster updated!');
+    // },
     methods: {
         setStyle: function(){
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
@@ -37,16 +43,6 @@ export default {
         },
         switchMonsterMenu: function(){
             this.$refs.monsterMenu.switchVisibility();
-        },
-        setDoneTask: function(){
-            // console.log(this.doneTasks[0][1]);
-            // console.log('id: ' + this.monster.id);
-            this.doneTask = this.doneTasks.filter(item =>
-                // item.date_limit === this.monster.dateLimit
-                // &&
-                item.tasks_id === 1
-            );
-            // console.log(this.doneTask);
         }
     }
 }

@@ -17,6 +17,14 @@ class Task extends Model
         'is_activated' => true,
     ];
 
+    // リレーション
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+    public function donetasks() {
+        return $this->hasMany('App\DoneTask');
+    }
+
     //指定のユーザーIDをもつタスクを昇順でスコープする。
     public function scopeUserIdEqual($query, $str) {
         return $query->where('user_id', $str)

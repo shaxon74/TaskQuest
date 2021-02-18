@@ -9,13 +9,13 @@
         <p>Name: {{ this.monster.name }}</p>
         <p>reword: {{ this.monster.reword }}</p>
         <p>dateLimit: {{ this.monster.dateLimit }}</p>
-        <p>done: {{ this.doneTask.is_done }}</p>
+        <!-- <p>done: {{ this.doneTask.is_done }}</p> -->
     </div>
 </template>
 
 <script>
 export default {
-    props: ['monster', 'doneTask'],
+    props: ['monster'],
     data: function(){
         return {
             is_active: false,
@@ -23,12 +23,16 @@ export default {
             axios_data: {
                 tasks_id: this.monster.id,
                 date_limit: this.monster.dateLimit.format('YYYY-MM-DD')
-            }
+            },
         }
     },
-    mounted: function(){
-        // this.getStatus();
-    },
+    // beforeUpdate: function(){
+    //     console.log('MonsterMenu beforeUpdate!');
+    //     // console.log(this.doneTask);
+    // },
+    // updated: function(){
+    //     console.log('MonsterMenu updated!');
+    // },
     methods: {
         switchVisibility: function() {
             this.is_active = !this.is_active;
@@ -36,6 +40,7 @@ export default {
             'visibility: visible;' : 'visibility: hidden;'
         },
         switchDone: function() {
+            console.log(this.doneTask);
             axios.post('/axios/done_task', this.axios_data).then(response => {
             }).catch(error => {
                 console.log(error);
