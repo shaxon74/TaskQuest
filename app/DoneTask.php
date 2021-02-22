@@ -26,9 +26,15 @@ class DoneTask extends Model
         return $this->belongsTo('App\Task');
     }
 
-    //指定のユーザーIDをもつタスクを昇順でスコープする。
-    public function scopeUserIdEqual($query, $str) {
-        return $query->where('user_id', $str);
+    //指定のユーザーIDをもつタスクをスコープする。
+    public function scopeUserIdEqual($query, $id) {
+        return $query->where('user_id', $id);
+    }
+
+    //本日を含む以降のタスクをスコープする。
+    public function scopeDatelimitThanToday($query) {
+        $now = date('Y-m-d'); // 現在の日付
+        return $query->where('date_limit', '>=', $now);
     }
 
     //指定のユーザーIDをもつタスクを昇順でスコープする。

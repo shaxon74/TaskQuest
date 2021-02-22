@@ -13,25 +13,13 @@ export default {
     data: function(){
         return {
             monsters: [],
-            // monsters: this.createMonsters(),
-            // doneTasks: this.getDoneTasks(),
             daysLength: 2,
         }
     },
     mounted: async function(){
         await this.createMonsters();
-        // await this.getDoneTasks();
-        // this.sleep(5000);
-        // console.log(this.monsters);
-        // console.log(this.doneTasks);
         console.log('TaskMonsters mounted!!');
     },
-    // beforeUpdate: function(){
-    //     console.log('Monster beforeUpdate!');
-    // },
-    // updated: function(){
-    //     console.log('Monster updated!');
-    // },
     methods: {
         createMonsters: async function(){
             // Axiosでレコードを取出す。
@@ -47,14 +35,15 @@ export default {
                 tasks     = response.data.tasks;
                 doneTasks = response.data.donetasks;
             }); // endaxios.get
-            console.log(tasks);
-            console.log(doneTasks);
+            // console.log(tasks);
+            // console.log(doneTasks);
             // 表示する日付長だけmonsterデータを作成する。
             for(let cnt = 0; cnt < this.daysLength; cnt++) {
                 numPerDay = 0;
-                dateCurrent = today.add(cnt, 'day');
+                dateCurrent = today.add(cnt, 'day').startOf('day');
                 tasks.forEach( task => {
-                    dateLimit = this.setDateLimit(task.type, dateCurrent);
+                    dateLimit = this.setDateLimit(task.type, dateCurrent)
+                                    .startOf('day');
                     // taskからmonster連想配列を生成しmonsters配列にpushする。
                     if( dateLimit.isSame(dateCurrent) ){
                         this.monsters.push({
@@ -78,35 +67,24 @@ export default {
         setDateLimit: function(type, dateCurrent) {
             let dateLimit_ret;
             switch(type){
-                case 1:
-                dateLimit_ret = dateCurrent;
+                case 1: dateLimit_ret = dateCurrent;
                 break;
-                case 2:
-                dateCurrent.day() == 0 ?
-                dateLimit_ret = dateCurrent :
-                dateLimit_ret = dateCurrent.endOf('week').add(1, 'day');
+                case 2: dateLimit_ret = dateCurrent.day() == 0 ?
+                            dateCurrent :
+                            dateCurrent.endOf('week').add(1, 'day');
                 break;
-                case 3:
-                dateLimit_ret = dateCurrent.endOf('month');
+                case 3: dateLimit_ret = dateCurrent.endOf('month');
                 break;
             }
             return dateLimit_ret;
         },
         setDoneTask: function(doneTasks, task_id, dateLimit){
-            console.log( doneTasks[0].date_limit );
-            console.log( dateLimit.format('YYYY-MM-DD 00:00:00') );
             const doneTask = doneTasks.filter(item =>
                 item.task_id === task_id
                 && item.date_limit === dateLimit.format('YYYY-MM-DD 00:00:00')
             ).shift();
-            // console.log( Object.keys(doneTask) );
             // console.log( doneTask );
-            console.log( doneTask );
-            // this.doneTasks.forEach( doneTask => {
-            //     console.log(doneTask);
-            // });
-            return 0;
-            // return doneTask.is_done;
+            return doneTask != undefined ? doneTask.is_done : 0;
         }
     }   // endmethods
 }

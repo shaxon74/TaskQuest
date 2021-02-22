@@ -20,14 +20,6 @@ export default {
         this.setStyle();
         console.log('Monster mounted!');
     },
-    // beforeUpdate: function(){
-    //     // this.setStyle();
-    //     // this.setDoneTask();
-    //     console.log('Monster beforeUpdate!');
-    // },
-    // updated: function(){
-    //     console.log('Monster updated!');
-    // },
     methods: {
         setStyle: function(){
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
@@ -39,7 +31,7 @@ export default {
                 + this.monster.numPerDay % 5  * 40;
             let styleLeft = 'left: ' + positionLeft + 'px;';
             let styleTop  = 'top: '  + positionTop  + 'px;';
-            this.style = styleLeft + styleTop;
+            this.style    = styleLeft + styleTop;
         },
         switchMonsterMenu: function(){
             this.$refs.monsterMenu.switchVisibility();
