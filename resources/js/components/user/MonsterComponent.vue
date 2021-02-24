@@ -18,7 +18,6 @@ export default {
     },
     mounted: function(){
         this.setStyle();
-        console.log('Monster mounted!');
     },
     methods: {
         setStyle: function(){

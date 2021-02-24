@@ -1,5 +1,5 @@
 <template>
-    <div class="TaskMonsters" style="width: 1200px;">
+    <div class="TaskMonsters" :style="styleWidth">
         <monster-component
             v-for="monster in monsters"
             :key=monster.key
@@ -10,18 +10,19 @@
 
 <script>
 export default {
+    props: ['range'],
     data: function(){
         return {
             monsters: [],
-            daysLength: 2,
+            styleWidth: '',
         }
     },
     mounted: async function(){
-        await this.createMonsters();
-        console.log('TaskMonsters mounted!!');
+        await this.createMonsters(this.range);
+        this.setStyle(7);
     },
     methods: {
-        createMonsters: async function(){
+        createMonsters: async function(daysLength){
             // Axiosでレコードを取出す。
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
             let today = dayjs();
@@ -31,6 +32,7 @@ export default {
             let numPerDay;
             let tasks;
             let doneTasks;
+            this.monsters = [];
             await axios.get('/axios/tasks').then(response => {
                 tasks     = response.data.tasks;
                 doneTasks = response.data.donetasks;
@@ -38,7 +40,7 @@ export default {
             // console.log(tasks);
             // console.log(doneTasks);
             // 表示する日付長だけmonsterデータを作成する。
-            for(let cnt = 0; cnt < this.daysLength; cnt++) {
+            for(let cnt = 0; cnt < daysLength; cnt++) {
                 numPerDay = 0;
                 dateCurrent = today.add(cnt, 'day').startOf('day');
                 tasks.forEach( task => {
@@ -61,8 +63,8 @@ export default {
                     }   // endif
                 }); // endforeach
             }   // endfor
-            console.log('createMonsters');
-            console.log(this.monsters);
+            // console.log('createMonsters');
+            // console.log(this.monsters);
         },  // endfunction
         setDateLimit: function(type, dateCurrent) {
             let dateLimit_ret;
@@ -85,6 +87,9 @@ export default {
             ).shift();
             // console.log( doneTask );
             return doneTask != undefined ? doneTask.is_done : 0;
+        },
+        setStyle: function(inRange){
+            this.styleWidth = 'width: ' + (inRange*100 + 200) + 'px;';
         }
     }   // endmethods
 }

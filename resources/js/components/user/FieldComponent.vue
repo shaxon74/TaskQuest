@@ -9,14 +9,27 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
 <template>
     <div class="field">
         <div class="my-area" :style="this.widthMyArea">
+            <div class="range-menu">
+                <a class="menu-top"
+                v-on:click="switchRangeMenu">
+                    範囲:{{ this.range }}日間
+                </a>
+                <ul v-if="this.rangeMenuIsActive">
+                    <li v-on:click="changeRange(7)">7日間</li>
+                    <li v-on:click="changeRange(30)">1ヶ月</li>
+                </ul>
+            </div>
             <div class="hero">
                 <button v-on:click="this.switchMyMenu">open</button>
-                <mymenu-component ref="MyMenu">
+                <mymenu-component ref="myMenu">
                 </mymenu-component>
             </div>
         </div>
         <div class="monsters-area" :style="this.widthMonstersArea">
-            <taskmonsters-component></taskmonsters-component>
+            <taskmonsters-component
+                :range="this.range"
+                ref="teskMonsters">
+            </taskmonsters-component>
         </div>
     </div>
 </template>
@@ -28,6 +41,8 @@ export default {
             width: 250,
             widthMyArea: '',
             widthMonstersArea: '',
+            range: 7,
+            rangeMenuIsActive: false,
         }
     },
     mounted: function(){
@@ -36,7 +51,16 @@ export default {
     },
     methods: {
         switchMyMenu: function(){
-            this.$refs.MyMenu.switch();
+            this.$refs.myMenu.switch();
+        },
+        switchRangeMenu: function(){
+            this.rangeMenuIsActive = !(this.rangeMenuIsActive);
+        },
+        changeRange: function(num){
+            this.range = num;
+            this.switchRangeMenu();
+            this.$refs.teskMonsters.createMonsters(this.range);
+            this.$refs.teskMonsters.setStyle(this.range);
         }
     }
 }
@@ -44,13 +68,35 @@ export default {
 
 <style lang="scss">
 .field {
-    width: 100%;
     height: auto;
     overflow: scroll;
     display: flex;
     .my-area {
         position: relative;
         background-color: #944;
+        .range-menu {
+            position: absolute;
+            color: black;
+            text-align: center;
+            font-size: 16px;
+            border:2px solid #333;
+            .menu-top {
+                display: inline-block;
+                width: 150px;
+                height: 40px;
+                padding-top: 6px;
+                background-color: #bbb;
+                border-top:2px solid #fff;
+                border-bottom:2px solid #fff;
+            }
+            ul li{
+                width: 150px;
+                height: 40px;
+                padding-top: 6px;
+                background-color: #bbb;
+                border-bottom:2px solid #fff;
+            }
+        }
         .hero {
             position: absolute;
             top: 200px;
