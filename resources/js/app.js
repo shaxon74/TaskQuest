@@ -19,6 +19,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+// モンスター表示コンポーネント
 Vue.component('example-component',      require('./components/ExampleComponent.vue').default);
 Vue.component('original-component',     require('./components/OriginalComponent.vue').default);
 Vue.component('field-component',        require('./components/user/FieldComponent.vue').default);
@@ -27,12 +28,19 @@ Vue.component('monster-component',      require('./components/user/MonsterCompon
 Vue.component('mymenu-component',       require('./components/user/MyMenuComponent.vue').default);
 Vue.component('monstermenu-component',  require('./components/user/MonsterMenuComponent.vue').default);
 
+// タスク管理コンポーネント
+Vue.component('tasks-component',        require('./components/user/TasksComponent.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
+const appField = new Vue({
+    el: '#appField',
+});
+
+const appTasks = new Vue({
+    el: '#appTasks',
 });

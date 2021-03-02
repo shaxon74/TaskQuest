@@ -4,12 +4,15 @@
 
 <section class="field-section">
     <h2>Field</h2>
-    <div id='app'>
+    <div id='appField'>
         <field-component></field-component>
     </div>
 
 
 <section class="task-list-section">
+    <div id='appTasks'>
+        <tasks-component></tasks-component>
+    </div>
     <h2>タスク一覧</h2>
     <table class="task-list">
         <tr><th>name</th><th>type</th>
@@ -23,13 +26,6 @@
                 </tr>
             @endforeach
     </table>
-</section>
-
-<section class="vue-test-section">
-    <h2>Vue.jsテスト</h2>
-    <div id="app">
-        <original-component></original-component>
-    </div>
 </section>
 
 @endsection
