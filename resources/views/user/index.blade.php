@@ -10,6 +10,7 @@
 
 
 <section class="task-list-section">
+    <h2 style="display: none">タスク登録</h2>
     <div id='appTasks'>
         <tasks-component></tasks-component>
     </div>

@@ -1,20 +1,31 @@
 <template>
     <div class="tasks">
         <a>タスクを登録</a>
-        <form class="task_form" action="/tasks/create" method="post">
+        <div class="line"></div>
+        <form class="task-form" action="/tasks/create" method="post">
             <input type="number" name= "user_id" value="1" style="display:none">
-            <table>
-                <tr><th>name</th><td><input type="text" name="name"></td></tr>
-                <tr><th>type</th><td>
-                    <select name="type">
-                        <option value="1">デイリー</option>
-                        <option value="2">ウィークリー</option>
-                        <option value="3">マンスリー</option>
-                        <option value="4">特定日付</option>
-                    </select></td></tr>
-                <tr><th>reword</th><td><input type="number" name="reword"></td></tr>
-                <tr><th><input type="submit" value=" 追加"></th></tr>
-            </table>
+            <a>タスク名</a></br>
+            <input v-model="name" placeholder="名前を入力"></br>
+            <a>タスク種別</a></br>
+            <select v-model="type">
+                <option disabled value="">タスク種別を選択</option>
+                <option>デイリー</option>
+                <option>ウィークリー</option>
+                <option>マンスリー</option>
+                <option>日付選択</option>
+            </select></br>
+            <div v-if="this.type === '日付選択'">
+                <a>日付</a></br>
+                <input class="input-year" v-model="year" placeholder="">
+                <a>年</a>
+                <input class="input-month" v-model="month" placeholder="">
+                <a>月</a>
+                <input class="input-date" v-model="day" placeholder="">
+                <a>日</a>
+            </div>
+            <a>報酬</a></br>
+            <input v-model="reword" placeholder="報酬額を入力"></br>
+            <button class="button" v-on:click="">登録</button>
         </form>
     </div>
 </template>
@@ -23,6 +34,16 @@
 export default {
     data: function(){
         return {
+            name: '',
+            type: '',
+            year: '',
+            month: '',
+            day: '',
+            reword: '',
+        }
+    },
+    methods: {
+        submit: function() {
 
         }
     }
@@ -30,5 +51,38 @@ export default {
 </script>
 
 <style lang="scss">
-
+.tasks {
+    margin: 10px 0;
+    padding: 10px;
+    width: 210px;
+    font-size: 1.8rem;
+    color: #333;
+    border: 2px solid #bbb;
+    border-radius:10px;
+    .line {
+        height: 0;
+        border-top: 1px solid #666;
+    }
+    .task-form {
+        a {
+            font-size: 1.6rem;
+        }
+        input {
+            width: 100%;
+        }
+        select {
+            width: 100%;
+        }
+        .input-year {
+            width: 38px;
+        }
+        .input-month, .input-date {
+            width: 24px;
+        }
+        .button {
+            width: auto;
+            margin-top: 10px;
+        }
+    }
+}
 </style>
