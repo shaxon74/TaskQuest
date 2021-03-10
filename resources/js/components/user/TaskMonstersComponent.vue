@@ -89,7 +89,7 @@ export default {
             return doneTask != undefined ? doneTask.is_done : 0;
         },
         setStyle: function(inRange){
-            this.styleWidth = 'width: ' + (inRange*100 + 200) + 'px;';
+            this.styleWidth = 'width: ' + (inRange*120 + 200) + 'px;';
         }
     }   // endmethods
 }

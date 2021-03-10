@@ -48,7 +48,7 @@ export default {
                 { text: 'マンスリー', value: '3' },
                 { text: '日付選択', value: '4' }
             ],
-            errors: []
+            errors: [],
         }
     },
     methods: {
@@ -67,11 +67,12 @@ export default {
                 limit : limit_date,
                 reword: this.reword,
             };
-            console.log(axiosData);
+            // console.log(axiosData);
             if ( this.check(axiosData) ) {
                 axios.post('/tasks/create', axiosData)
                 .then(response => {
                     console.log(response.data.message);
+                    this.$emit('addTask');
                 }).catch(error => {
                     console.log(error);
                 });
@@ -104,7 +105,7 @@ export default {
             if (data.reword <= 0) {
                 this.errors.push( {kind: 3, message: '・報酬額を入力してください。'} );
             };
-            console.log(this.errors);
+            // console.log(this.errors);
             return this.errors.length == 0 ? true : false;
         },
         filt_error: function(kind) {

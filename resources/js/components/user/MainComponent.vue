@@ -7,30 +7,34 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
  -->
 
 <template>
-    <div class="field">
-        <div class="my-area" :style="this.widthMyArea">
-            <div class="range-menu">
-                <a class="menu-top"
-                v-on:click="switchRangeMenu">
-                    範囲:{{ this.range }}日間
-                </a>
-                <ul v-if="this.rangeMenuIsActive">
-                    <li v-on:click="changeRange(7)">7日間</li>
-                    <li v-on:click="changeRange(30)">1ヶ月</li>
-                </ul>
+    <div class="main">
+        <div class="field">
+            <div class="my-area" :style="this.widthMyArea">
+                <div class="range-menu">
+                    <a class="menu-top"
+                    v-on:click="switchRangeMenu">
+                        範囲:{{ this.range }}日間
+                    </a>
+                    <ul v-if="this.rangeMenuIsActive">
+                        <li v-on:click="changeRange(7)">7日間</li>
+                        <li v-on:click="changeRange(30)">1ヶ月</li>
+                    </ul>
+                </div>
+                <div class="hero">
+                    <button v-on:click="this.switchMyMenu">open</button>
+                    <mymenu-component ref="myMenu">
+                    </mymenu-component>
+                </div>
             </div>
-            <div class="hero">
-                <button v-on:click="this.switchMyMenu">open</button>
-                <mymenu-component ref="myMenu">
-                </mymenu-component>
+            <div class="monsters-area" :style="this.widthMonstersArea">
+                <taskmonsters-component
+                    :range="this.range"
+                    ref="teskMonsters">
+                </taskmonsters-component>
             </div>
         </div>
-        <div class="monsters-area" :style="this.widthMonstersArea">
-            <taskmonsters-component
-                :range="this.range"
-                ref="teskMonsters">
-            </taskmonsters-component>
-        </div>
+        <tasks-component v-on:addTask="updateMonsters">
+        </tasks-component>
     </div>
 </template>
 
@@ -59,6 +63,9 @@ export default {
         changeRange: function(num){
             this.range = num;
             this.switchRangeMenu();
+            this.updateMonsters();
+        },
+        updateMonsters: function() {
             this.$refs.teskMonsters.createMonsters(this.range);
             this.$refs.teskMonsters.setStyle(this.range);
         }

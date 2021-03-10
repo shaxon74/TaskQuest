@@ -2,18 +2,14 @@
 
 @section('content')
 
-<section class="field-section">
-    <h2>Field</h2>
-    <div id='appField'>
-        <field-component></field-component>
+<section class="App-section">
+    <h2>App</h2>
+    <div id='app'>
+        <main-component></main-component>
     </div>
-
+</section>
 
 <section class="task-list-section">
-    <h2 style="display: none">タスク登録</h2>
-    <div id='appTasks'>
-        <tasks-component></tasks-component>
-    </div>
     <h2>タスク一覧</h2>
     <table class="task-list">
         <tr><th>name</th><th>type</th>

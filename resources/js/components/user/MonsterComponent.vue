@@ -23,11 +23,12 @@ export default {
         setStyle: function(){
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
             let positionLeft = 40
-                + this.monster.dateLimit.diff(dayjs().subtract(1,'day'), 'day') * 100
-                + Math.floor((this.monster.numPerDay)/5, 0) * 20
+                + this.monster.dateLimit.diff(dayjs().subtract(1,'day'), 'day') * 120
+                + Math.floor((this.monster.numPerDay)/5, 0) * 60
                 - this.monster.numPerDay * 5;
             let positionTop = 100
-                + this.monster.numPerDay % 5  * 40;
+                + this.monster.numPerDay % 5  * 40
+                + Math.floor((this.monster.numPerDay)/5, 0) * 10;
             let styleLeft = 'left: ' + positionLeft + 'px;';
             let styleTop  = 'top: '  + positionTop  + 'px;';
             this.style    = styleLeft + styleTop;
