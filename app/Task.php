@@ -13,8 +13,7 @@ class Task extends Model
 
     // カラムのデフォルト値を設定
     protected $attributes = [
-        'is_finished' => false,
-        'is_activated' => true,
+        'limit' => 0,
     ];
 
     // リレーション

@@ -17,8 +17,11 @@ class TaskController extends Controller
     public function create(Request $request) {
         $task = new Task();
         $form = $request->all();
+        $form['user_id'] = Auth::user()->id;
         unset($form['_token']);
         $task->fill($form)->save();
-        return redirect('/tasks');
+        return response([
+            'message'   => 'add' . $task->name . '!',
+        ]);
     }
 }
