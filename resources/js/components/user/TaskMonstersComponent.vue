@@ -44,7 +44,7 @@ export default {
                 numPerDay = 0;
                 dateCurrent = today.add(cnt, 'day').startOf('day');
                 tasks.forEach( task => {
-                    dateLimit = this.setDateLimit(task.type, dateCurrent)
+                    dateLimit = this.setDateLimit(task, dateCurrent)
                                     .startOf('day');
                     // taskからmonster連想配列を生成しmonsters配列にpushする。
                     if( dateLimit.isSame(dateCurrent) ){
@@ -66,9 +66,10 @@ export default {
             // console.log('createMonsters');
             // console.log(this.monsters);
         },  // endfunction
-        setDateLimit: function(type, dateCurrent) {
+        setDateLimit: function(task, dateCurrent) {
+            let dayjs = require('dayjs');
             let dateLimit_ret;
-            switch(type){
+            switch(task.type){
                 case 1: dateLimit_ret = dateCurrent;
                 break;
                 case 2: dateLimit_ret = dateCurrent.day() == 0 ?
@@ -76,6 +77,8 @@ export default {
                             dateCurrent.endOf('week').add(1, 'day');
                 break;
                 case 3: dateLimit_ret = dateCurrent.endOf('month');
+                break;
+                case 4: dateLimit_ret = dayjs(task.limit);
                 break;
             }
             return dateLimit_ret;
