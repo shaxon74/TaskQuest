@@ -1,5 +1,5 @@
 <template>
-    <div class="TaskMonsters" :style="styleWidth">
+    <div class="TaskMonsters">
         <monster-component
             v-for="monster in monsters"
             :key=monster.key
@@ -26,8 +26,8 @@ export default {
             // Axiosでレコードを取出す。
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
             let today = dayjs();
-            let dateCurrent = dayjs();     // for文でターゲットとしている日付
-            let dateLimit = dayjs();       // task.typeから判定したタスク期限
+            let dateCurrent = dayjs();      // for文でターゲットとしている日付
+            let dateLimit = dayjs();        // task.typeから判定したタスク期限
             let key = 0;
             let numPerDay;
             let tasks;
@@ -101,7 +101,6 @@ export default {
 <style lang="scss">
     .TaskMonsters {
         position:relative;
-        height: 350px;
         background-color: #295;
     }
     .dbg {

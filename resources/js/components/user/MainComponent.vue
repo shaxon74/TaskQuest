@@ -1,18 +1,10 @@
-<!--
-dayコンポーネントに以下のような連想配列を渡したい。
-(日付、モンスターの種類(タスク種類)、モンスターのステータス(タスク内容))
-Fieldコンポーネントでは日付に応じdayコンポーネントを配置する。
-Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
-参考>>https://reffect.co.jp/laravel/create-vue-laravel-environment#Axios
- -->
-
 <template>
-    <div class="main">
+<div class="main">
+    <div class="scroll">
         <div class="field">
             <div class="my-area" :style="this.widthMyArea">
                 <div class="range-menu">
-                    <a class="menu-top"
-                    v-on:click="switchRangeMenu">
+                    <a class="menu-top" v-on:click="switchRangeMenu">
                         範囲:{{ this.range }}日間
                     </a>
                     <ul v-if="this.rangeMenuIsActive">
@@ -26,16 +18,13 @@ Axiosでレコードをデータとして取出しVue.jsに渡すらしい?
                     </mymenu-component>
                 </div>
             </div>
-            <div class="monsters-area" :style="this.widthMonstersArea">
-                <taskmonsters-component
-                    :range="this.range"
-                    ref="teskMonsters">
-                </taskmonsters-component>
-            </div>
+        <taskmonsters-component :range="this.range" ref="teskMonsters">
+        </taskmonsters-component>
         </div>
-        <tasks-component v-on:addTask="updateMonsters">
-        </tasks-component>
     </div>
+    <tasks-component v-on:addTask="updateMonsters">
+    </tasks-component>
+</div>
 </template>
 
 <script>
@@ -74,48 +63,49 @@ export default {
 </script>
 
 <style lang="scss">
-.field {
-    height: auto;
-    overflow: scroll;
-    display: flex;
-    .my-area {
-        position: relative;
-        background-color: #944;
-        .range-menu {
-            position: absolute;
-            color: black;
-            text-align: center;
-            font-size: 16px;
-            border:2px solid #333;
-            .menu-top {
-                display: inline-block;
-                width: 150px;
-                height: 40px;
-                padding-top: 6px;
-                background-color: #bbb;
-                border-top:2px solid #fff;
-                border-bottom:2px solid #fff;
-            }
-            ul li{
-                width: 150px;
-                height: 40px;
-                padding-top: 6px;
-                background-color: #bbb;
-                border-bottom:2px solid #fff;
-            }
-        }
-        .hero {
-            position: absolute;
-            top: 200px;
-            left: 150px;
-            width: 50px;
-            height: 50px;
-            background-color: #368;
+.scroll {
+    overflow-x: scroll;
+    .field {
+        height: 350px;
+        background-color: #296;
+        display: flex;
+        .my-area {
             position: relative;
+            height: 350px;
+            background-color: #944;
+            .range-menu {
+                position: absolute;
+                color: black;
+                text-align: center;
+                font-size: 16px;
+                border:2px solid #333;
+                .menu-top {
+                    display: inline-block;
+                    width: 150px;
+                    height: 40px;
+                    padding-top: 6px;
+                    background-color: #bbb;
+                    border-top:2px solid #fff;
+                    border-bottom:2px solid #fff;
+                }
+                ul li{
+                    width: 150px;
+                    height: 40px;
+                    padding-top: 6px;
+                    background-color: #bbb;
+                    border-bottom:2px solid #fff;
+                }
+            }
+            .hero {
+                position: absolute;
+                top: 200px;
+                left: 150px;
+                width: 50px;
+                height: 50px;
+                background-color: #368;
+                position: relative;
+            }
         }
-    }
-    .monsters-area {
-        background-color: #386;
     }
 }
 </style>
