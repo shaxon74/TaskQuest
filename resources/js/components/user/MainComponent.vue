@@ -1,5 +1,5 @@
 <template>
-<div class="main">
+<div class="main-component">
     <div class="scroll">
         <div class="field">
             <div class="my-area" :style="this.widthMyArea">
@@ -63,47 +63,50 @@ export default {
 </script>
 
 <style lang="scss">
-.scroll {
-    overflow-x: scroll;
-    .field {
-        height: 350px;
-        background-color: #296;
-        display: flex;
-        .my-area {
-            position: relative;
+.main-component {
+    // margin-top: 0;
+    .scroll {
+        overflow-x: scroll;
+        .field {
             height: 350px;
-            background-color: #944;
-            .range-menu {
-                position: absolute;
-                color: black;
-                text-align: center;
-                font-size: 16px;
-                border:2px solid #333;
-                .menu-top {
-                    display: inline-block;
-                    width: 150px;
-                    height: 40px;
-                    padding-top: 6px;
-                    background-color: #bbb;
-                    border-top:2px solid #fff;
-                    border-bottom:2px solid #fff;
-                }
-                ul li{
-                    width: 150px;
-                    height: 40px;
-                    padding-top: 6px;
-                    background-color: #bbb;
-                    border-bottom:2px solid #fff;
-                }
-            }
-            .hero {
-                position: absolute;
-                top: 200px;
-                left: 150px;
-                width: 50px;
-                height: 50px;
-                background-color: #368;
+            background-color: #296;
+            display: flex;
+            .my-area {
                 position: relative;
+                height: 350px;
+                background-color: #944;
+                .range-menu {
+                    position: absolute;
+                    color: black;
+                    text-align: center;
+                    font-size: 16px;
+                    border:2px solid #333;
+                    .menu-top {
+                        display: inline-block;
+                        width: 150px;
+                        height: 40px;
+                        padding-top: 6px;
+                        background-color: #bbb;
+                        border-top:2px solid #fff;
+                        border-bottom:2px solid #fff;
+                    }
+                    ul li{
+                        width: 150px;
+                        height: 40px;
+                        padding-top: 6px;
+                        background-color: #bbb;
+                        border-bottom:2px solid #fff;
+                    }
+                }
+                .hero {
+                    position: absolute;
+                    top: 200px;
+                    left: 150px;
+                    width: 50px;
+                    height: 50px;
+                    background-color: #368;
+                    position: relative;
+                }
             }
         }
     }
