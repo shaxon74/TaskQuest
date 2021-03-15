@@ -15,3 +15,5 @@ yarn-error.log
 /public/js
 /resources/images
 /public/main.js
+composer.json
+package.json
