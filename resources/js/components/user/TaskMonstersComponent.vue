@@ -36,7 +36,7 @@ export default {
             await axios.get('/tasks').then(response => {
                 tasks     = response.data.tasks;
                 doneTasks = response.data.donetasks;
-            }); // endaxios.get
+            });
             // console.log(tasks);
             // console.log(doneTasks);
             // 表示する日付長だけmonsterデータを作成する。

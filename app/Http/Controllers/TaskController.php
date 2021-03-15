@@ -9,10 +9,11 @@ use App\DoneTask;
 
 class TaskController extends Controller
 {
-    public function get(Request $request) {
+    public function get() {
         $tasks     = Task::UserIdEqual(Auth::user()->id)->get();
         $donetasks = DoneTask::UserIdEqual(Auth::user()->id)
-                     ->DatelimitThanToday()->get();
+        ->DatelimitThanToday()->get();
+
         return response([
             'tasks' => $tasks,
             'donetasks' => $donetasks,
