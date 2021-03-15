@@ -9,15 +9,23 @@ use App\DoneTask;
 
 class TaskController extends Controller
 {
-    public function get() {
-        $tasks     = Task::UserIdEqual(Auth::user()->id)->get();
-        $donetasks = DoneTask::UserIdEqual(Auth::user()->id)
-        ->DatelimitThanToday()->get();
+    public function get(Request $request) {
+        $req   = $request->reqDoneTasks;
+        $tasks = Task::UserIdEqual(Auth::user()->id)->get();
+        if ($req == 'true') {
+            $donetasks = DoneTask::UserIdEqual(Auth::user()->id)
+            ->DatelimitThanToday()->get();
+            $response = [
+                'tasks' => $tasks,
+                'donetasks' => $donetasks,
+            ];
+        } else {
+            $response = [
+                'tasks' => $tasks,
+            ];
+        }
 
-        return response([
-            'tasks' => $tasks,
-            'donetasks' => $donetasks,
-        ]);
+        return $response;
     }
 
     public function create(Request $request) {
@@ -27,7 +35,7 @@ class TaskController extends Controller
         unset($form['_token']);
         $task->fill($form)->save();
         return response([
-            'message'   => 'add' . $task->name . '!',
+            'message'   => 'Add task >> [' . $task->name . ']',
         ]);
     }
 }
