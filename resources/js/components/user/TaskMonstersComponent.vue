@@ -33,7 +33,7 @@ export default {
             let tasks;
             let doneTasks;
             this.monsters = [];
-            await axios.get('/axios/tasks').then(response => {
+            await axios.get('/tasks').then(response => {
                 tasks     = response.data.tasks;
                 doneTasks = response.data.donetasks;
             }); // endaxios.get

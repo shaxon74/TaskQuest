@@ -4,20 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Task;
 use App\DoneTask;
 
-class AxiosTasksController extends Controller
+class DoneTaskController extends Controller
 {
-    public function get(Request $request) {
-        $tasks     = Task::UserIdEqual(Auth::user()->id)->get();
-        $donetasks = DoneTask::UserIdEqual(Auth::user()->id)
-                     ->DatelimitThanToday(1)->get();
-        return response([
-            'tasks' => $tasks,
-            'donetasks' => $donetasks,
-        ]);
-    }
 
     public function post(Request $request) {
         $donetask = DoneTask::firstOrNew([

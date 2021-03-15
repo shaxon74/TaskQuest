@@ -35,7 +35,7 @@ export default {
         },
         switchDone: async function() {
             console.log('switchDone');
-            await axios.post('/axios/done_task', this.axios_data)
+            await axios.post('/done_task', this.axios_data)
             .then(response => {
                 this.monster.is_done = response.data.is_done;
             }).catch(error => {

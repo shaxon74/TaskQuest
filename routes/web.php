@@ -11,24 +11,13 @@
 |
 */
 
-Route::get('/', 'StaticController@opening')->name('opening');
-
 Auth::routes();
 
-Route::get('/home2', 'HomeController@index')->name('home2');
-Route::get('/home', 'UserController@index')->name('home');
-Route::get('/tasks', 'TaskController@index')->name('tasks');
-Route::post('/tasks/create', 'TaskController@create')->name('task_create');
+Route::get('/', 'StaticController@opening');
+Route::get('/home', 'UserController@index');
+// Route::get('/home2', 'HomeController@index');
 
-// Route::get('/axios/tasks',function(){
-// 	return App\Task::UserIdEqual(Auth::user()->id)->get();
-// });
-
-Route::get('/axios/tasks', 'AxiosTasksController@get');
-
-Route::get('/axios/done_tasks',function(){
-	return App\DoneTask::UserIdEqual(Auth::user()->id)->get();
-});
-
-// Route::get('/axios/done_task', 'AxiosTasksController@get');
-Route::post('/axios/done_task', 'AxiosTasksController@post');
+//Axios
+Route::get('/tasks', 'TaskController@get');
+Route::post('/tasks/create', 'TaskController@create');
+Route::post('/done_task', 'DoneTaskController@post');

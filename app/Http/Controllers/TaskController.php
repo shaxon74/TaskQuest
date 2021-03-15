@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Task;
+use App\DoneTask;
 
 class TaskController extends Controller
 {
-    public function index() {
-        $tasks = Task::UserIdEqual( Auth::user()->id)
-                 ->get();
-        return view('task.index', ['tasks' => $tasks]);
+    public function get(Request $request) {
+        $tasks     = Task::UserIdEqual(Auth::user()->id)->get();
+        $donetasks = DoneTask::UserIdEqual(Auth::user()->id)
+                     ->DatelimitThanToday()->get();
+        return response([
+            'tasks' => $tasks,
+            'donetasks' => $donetasks,
+        ]);
     }
 
     public function create(Request $request) {
