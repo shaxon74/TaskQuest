@@ -22,14 +22,15 @@ window.Vue = require('vue');
 // モンスター表示コンポーネント
 Vue.component('example-component',      require('./components/ExampleComponent.vue').default);
 Vue.component('original-component',     require('./components/OriginalComponent.vue').default);
-Vue.component('main-component',        require('./components/user/MainComponent.vue').default);
+Vue.component('main-component',         require('./components/user/MainComponent.vue').default);
 Vue.component('taskmonsters-component', require('./components/user/TaskMonstersComponent.vue').default);
 Vue.component('monster-component',      require('./components/user/MonsterComponent.vue').default);
 Vue.component('mymenu-component',       require('./components/user/MyMenuComponent.vue').default);
 Vue.component('monstermenu-component',  require('./components/user/MonsterMenuComponent.vue').default);
 
 // タスク管理コンポーネント
-Vue.component('tasks-component',        require('./components/user/TasksComponent.vue').default);
+Vue.component('tasks-component',     require('./components/user/TasksComponent.vue').default);
+Vue.component('edittasks-component', require('./components/user/EditTasksComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
