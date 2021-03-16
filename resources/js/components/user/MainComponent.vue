@@ -2,7 +2,7 @@
 <div class="main-component">
     <div class="scroll">
         <div class="field">
-            <div class="my-area" :style="this.widthMyArea">
+            <div class="my-area">
                 <div class="range-menu">
                     <a class="menu-top" v-on:click="switchRangeMenu">
                         範囲:{{ this.range }}日間
@@ -18,12 +18,18 @@
                     </mymenu-component>
                 </div>
             </div>
-        <taskmonsters-component :range="this.range" ref="teskMonsters">
+        <taskmonsters-component
+            :range="this.range"
+            :tasks="this.tasks"
+            :done_tasks="this.doneTasks"
+            ref="teskMonsters">
         </taskmonsters-component>
         </div>
     </div>
     <tasks-component v-on:addTask="updateMonsters">
     </tasks-component>
+    <edittasks-component v-on:addTask="updateMonsters">
+    </edittasks-component>
 </div>
 </template>
 
@@ -31,33 +37,42 @@
 export default {
     data: function(){
         return {
-            width: 250,
-            widthMyArea: '',
-            widthMonstersArea: '',
             range: 7,
             rangeMenuIsActive: false,
+            tasks: [],
+            doneTasks: []
         }
     },
     mounted: function(){
-        this.widthMyArea = 'width: ' + this.width + 'px;',
-        this.widthMonstersArea = 'width: calc(100% - ' + this.width + 'px);'
+        this.updateMonsters();
     },
     methods: {
-        switchMyMenu: function(){
-            this.$refs.myMenu.switch();
-        },
-        switchRangeMenu: function(){
-            this.rangeMenuIsActive = !(this.rangeMenuIsActive);
+        getTasks: async function() {
+            await axios.get('/tasks', {
+                params: {
+                    reqDoneTasks: true
+                }
+            }).then(response => {
+                this.tasks     = response.data.tasks;
+                this.doneTasks = response.data.donetasks;
+            });
         },
         changeRange: function(num){
             this.range = num;
             this.switchRangeMenu();
             this.updateMonsters();
         },
-        updateMonsters: function() {
-            this.$refs.teskMonsters.createMonsters(this.range);
+        switchRangeMenu: function(){
+            this.rangeMenuIsActive = !(this.rangeMenuIsActive);
+        },
+        updateMonsters: async function() {
+            await this.getTasks();
+            this.$refs.teskMonsters.createMonsters(this.range, this.tasks, this.doneTasks);
             this.$refs.teskMonsters.setStyle(this.range);
-        }
+        },
+        switchMyMenu: function(){
+            this.$refs.myMenu.switch();
+        },
     }
 }
 </script>
@@ -73,6 +88,7 @@ export default {
             display: flex;
             .my-area {
                 position: relative;
+                width: 250px;
                 height: 350px;
                 background-color: #944;
                 .range-menu {

@@ -10,7 +10,11 @@
 
 <script>
 export default {
-    props: ['range'],
+    props: [
+        'range',
+        'tasks',
+        'done_tasks',
+    ],
     data: function(){
         return {
             monsters: [],
@@ -18,11 +22,10 @@ export default {
         }
     },
     mounted: async function(){
-        await this.createMonsters(this.range);
         this.setStyle(7);
     },
     methods: {
-        createMonsters: async function(daysLength){
+        createMonsters: function(daysLength, tasks, done_tasks){
             // Axiosでレコードを取出す。
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
             let today = dayjs();
@@ -30,19 +33,8 @@ export default {
             let dateLimit = dayjs();        // task.typeから判定したタスク期限
             let key = 0;
             let numPerDay;
-            let tasks;
-            let doneTasks;
             this.monsters = [];
-            await axios.get('/tasks', {
-                params: {
-                    reqDoneTasks: true
-                }
-            }).then(response => {
-                tasks     = response.data.tasks;
-                doneTasks = response.data.donetasks;
-            });
-            // console.log(tasks);
-            // console.log(doneTasks);
+            if (tasks.length == 0) return;
             // 表示する日付長だけmonsterデータを作成する。
             for(let cnt = 0; cnt < daysLength; cnt++) {
                 numPerDay = 0;
@@ -60,15 +52,13 @@ export default {
                             'key'       : key,
                             'dateLimit' : dateLimit,
                             'numPerDay' : numPerDay,
-                            'is_done'   : this.setDoneTask(doneTasks, task.id, dateLimit)
+                            'is_done'   : this.setDoneTask(done_tasks, task.id, dateLimit)
                         });
                         key++;
                         numPerDay++;
                     }   // endif
                 }); // endforeach
             }   // endfor
-            // console.log('createMonsters');
-            // console.log(this.monsters);
         },  // endfunction
         setDateLimit: function(task, dateCurrent) {
             let dayjs = require('dayjs');
@@ -92,7 +82,6 @@ export default {
                 item.task_id === task_id
                 && item.date_limit === dateLimit.format('YYYY-MM-DD 00:00:00')
             ).shift();
-            // console.log( doneTask );
             return doneTask != undefined ? doneTask.is_done : 0;
         },
         setStyle: function(inRange){
