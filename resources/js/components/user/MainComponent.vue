@@ -28,7 +28,9 @@
     </div>
     <tasks-component v-on:addTask="updateMonsters">
     </tasks-component>
-    <edittasks-component v-on:addTask="updateMonsters">
+    <edittasks-component
+        v-on:updateTask="updateMonsters"
+        :tasks="this.tasks">
     </edittasks-component>
 </div>
 </template>

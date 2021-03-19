@@ -24,7 +24,6 @@ class TaskController extends Controller
                 'tasks' => $tasks,
             ];
         }
-
         return $response;
     }
 
@@ -36,6 +35,15 @@ class TaskController extends Controller
         $task->fill($form)->save();
         return response([
             'message'   => 'Add task >> [' . $task->name . ']',
+        ]);
+    }
+
+    public function delete(Request $request) {
+        $task = new Task();
+        $id = $request->id;
+        $task->destroy($id);
+        return response([
+            'message'   => 'Delete task >> [' . $task->name . ']',
         ]);
     }
 }
