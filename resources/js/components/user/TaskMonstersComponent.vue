@@ -48,7 +48,6 @@ export default {
                             'id'        : task.id,
                             'name'      : task.name,
                             'reword'    : task.reword,
-                            'finished'  : task.finished,
                             'key'       : key,
                             'dateLimit' : dateLimit,
                             'numPerDay' : numPerDay,

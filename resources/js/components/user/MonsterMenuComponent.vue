@@ -8,7 +8,7 @@
         </button>
         <p>Name: {{ this.monster.name }}</p>
         <p>reword: {{ this.monster.reword }}</p>
-        <p>dateLimit: {{ this.monster.dateLimit.format('YYYY-M-d') }}</p>
+        <p>dateLimit: {{ this.monster.dateLimit.format('YYYY-MM-DD') }}</p>
         <p v-if="this.monster.is_done">done: true</p>
         <p v-if="!this.monster.is_done">done: false</p>
     </div>
