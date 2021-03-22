@@ -9,14 +9,14 @@
             <th class=title-content>reword</th>
             <th class=title-content>limit</th>
         </tr>
-        <tr class="list-item" v-for="(task, index) in this.tasks" v-bind:key="task.id">
+        <tr class="list-item" v-for="task in this.tasks" v-bind:key="task.id">
             <td :style="style.item">{{ task.id }}</td>
             <td :style="style.item">{{ task.name }}</td>
             <td :style="style.item">{{ task.type }}</td>
             <td :style="style.item">{{ task.reword }}</td>
             <td :style="style.item">{{ task.limit }}</td>
             <td>
-                <button class="button" v-on:click="">更新</button>
+                <button class="button" v-on:click="1">更新</button>
                 <button class="button" v-on:click="deleteTasks(task.id)">削除</button>
             </td>
             <!-- <td><HelloWorld ref="child"/></td> -->

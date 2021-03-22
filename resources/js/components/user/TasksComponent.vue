@@ -50,7 +50,7 @@ export default {
             year: '',
             month: '',
             date: '',
-            day: 0,
+            day: 7,
             reword: '',
             options: {
                 type: [

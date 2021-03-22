@@ -26,10 +26,10 @@
         </taskmonsters-component>
         </div>
     </div>
-    <tasks-component v-on:addTask="updateMonsters">
+    <tasks-component v-on:addTask="this.updateMonsters">
     </tasks-component>
     <edittasks-component
-        v-on:updateTask="updateMonsters"
+        v-on:updateTask="this.updateMonsters"
         :tasks="this.tasks">
     </edittasks-component>
 </div>

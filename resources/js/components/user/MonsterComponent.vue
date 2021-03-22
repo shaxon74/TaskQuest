@@ -19,6 +19,9 @@ export default {
     mounted: function(){
         this.setStyle();
     },
+    updated: function() {
+        this.setStyle();
+    },
     methods: {
         setStyle: function(){
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
