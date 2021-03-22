@@ -9,7 +9,7 @@
             <th class=title-content>reword</th>
             <th class=title-content>limit</th>
         </tr>
-        <tr class="list-item" v-for="task in this.tasks" v-bind:key="task.id">
+        <tr class="list-item" v-for="task in futureTasks" v-bind:key="task.id">
             <td :style="style.item">{{ task.id }}</td>
             <td :style="style.item">{{ task.name }}</td>
             <td :style="style.item">{{ task.type }}</td>
@@ -19,7 +19,6 @@
                 <button class="button" v-on:click="1">更新</button>
                 <button class="button" v-on:click="deleteTasks(task.id)">削除</button>
             </td>
-            <!-- <td><HelloWorld ref="child"/></td> -->
         </tr>
     </table>
 </div>
@@ -53,6 +52,17 @@ export default {
             }).catch(error => {
                 console.log(error);
             });
+        },
+    },
+    computed: {
+        futureTasks: function() {
+            let dayjs = require('dayjs');
+            return this.tasks.filter( task => {
+                return task.limit == null
+                || dayjs().isBefore(dayjs(task.limit))
+                || dayjs().isSame(dayjs(task.limit));
+            }
+            )
         }
     }
 }
