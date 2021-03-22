@@ -21,9 +21,6 @@ export default {
             styleWidth: '',
         }
     },
-    mounted: async function(){
-        this.setStyle(7);
-    },
     methods: {
         createMonsters: function(daysLength, tasks, doneTasks){
             // Axiosでレコードを取出す。
@@ -58,7 +55,6 @@ export default {
                     }   // endif
                 }); // endforeach
             }   // endfor
-            console.log(this.monsters);
         },  // endfunction
         setDateLimit: function(task, dateCurrent) {
             let dayjs = require('dayjs');
@@ -86,17 +82,14 @@ export default {
             ).shift();
             return doneTask != undefined ? doneTask.is_done : 0;
         },
-        setStyle: function(inRange){
-            this.styleWidth = 'width: ' + (inRange*120 + 200) + 'px;';
-        }
     }   // endmethods
 }
 </script>
 
 <style lang="scss">
     .TaskMonsters {
-        position:relative;
-        background-color: #295;
+        position: relative;
+        background-color: rgb(44, 153, 138);
     }
     .dbg {
         background: #814;

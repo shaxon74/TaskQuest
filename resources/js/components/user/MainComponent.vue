@@ -1,7 +1,7 @@
 <template>
 <div class="main-component">
     <div class="scroll">
-        <div class="field">
+        <div class="field" :style="this.style">
             <div class="my-area">
                 <div class="range-menu">
                     <a class="menu-top" v-on:click="switchRangeMenu">
@@ -42,7 +42,8 @@ export default {
             range: 7,
             rangeMenuIsActive: false,
             tasks: [],
-            doneTasks: []
+            doneTasks: [],
+            style: 'width: 1290px;',
         }
     },
     mounted: function(){
@@ -62,6 +63,7 @@ export default {
         changeRange: function(num){
             this.range = num;
             this.switchRangeMenu();
+            this.setStyle(this.range);
             this.updateMonsters();
         },
         switchRangeMenu: function(){
@@ -70,11 +72,13 @@ export default {
         updateMonsters: async function() {
             await this.getTasks();
             this.$refs.teskMonsters.createMonsters(this.range, this.tasks, this.doneTasks);
-            this.$refs.teskMonsters.setStyle(this.range);
         },
         switchMyMenu: function(){
             this.$refs.myMenu.switch();
         },
+        setStyle: function(inRange){
+            this.style = 'width: ' + (inRange*120 + 200 + 250) + 'px;';
+        }
     }
 }
 </script>
