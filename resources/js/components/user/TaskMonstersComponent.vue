@@ -13,7 +13,7 @@ export default {
     props: [
         'range',
         'tasks',
-        'done_tasks',
+        'doneTasks',
     ],
     data: function(){
         return {
@@ -25,13 +25,13 @@ export default {
         this.setStyle(7);
     },
     methods: {
-        createMonsters: function(daysLength, tasks, done_tasks){
+        createMonsters: function(daysLength, tasks, doneTasks){
             // Axiosでレコードを取出す。
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
             let today = dayjs();
             let dateCurrent = dayjs();      // for文でターゲットとしている日付
             let dateLimit = dayjs();        // task.typeから判定したタスク期限
-            let key = 0;
+            let id = 0;
             let numPerDay;
             this.monsters = [];
             if (tasks.length == 0) return;
@@ -45,15 +45,15 @@ export default {
                     // taskからmonster連想配列を生成しmonsters配列にpushする。
                     if( dateLimit.isSame(dateCurrent) ){
                         this.monsters.push({
-                            'id'        : task.id,
+                            'taskId'    : task.id,
                             'name'      : task.name,
                             'reword'    : task.reword,
-                            'key'       : key,
+                            'id'        : id,
                             'dateLimit' : dateLimit,
                             'numPerDay' : numPerDay,
-                            'is_done'   : this.setDoneTask(done_tasks, task.id, dateLimit)
+                            'isDone'    : this.setDoneTask(doneTasks, task.id, dateLimit)
                         });
-                        key++;
+                        id++;
                         numPerDay++;
                     }   // endif
                 }); // endforeach
@@ -61,24 +61,24 @@ export default {
         },  // endfunction
         setDateLimit: function(task, dateCurrent) {
             let dayjs = require('dayjs');
-            let dateLimit_ret;
+            let dateLimitRet;
             switch(task.type){
-                case 1: dateLimit_ret = dateCurrent;
+                case 1: dateLimitRet = dateCurrent;
                 break;
-                case 2: dateLimit_ret = dateCurrent.day() == 0 ?
+                case 2: dateLimitRet = dateCurrent.day() == 0 ?
                             dateCurrent :
                             dateCurrent.endOf('week').add(1, 'day');
                 break;
-                case 3: dateLimit_ret = dateCurrent.endOf('month');
+                case 3: dateLimitRet = dateCurrent.endOf('month');
                 break;
-                case 4: dateLimit_ret = dayjs(task.limit);
+                case 4: dateLimitRet = dayjs(task.limit);
                 break;
             }
-            return dateLimit_ret;
+            return dateLimitRet;
         },
-        setDoneTask: function(doneTasks, task_id, dateLimit){
+        setDoneTask: function(doneTasks, taskId, dateLimit){
             const doneTask = doneTasks.filter(item =>
-                item.task_id === task_id
+                item.task_id === taskId
                 && item.date_limit === dateLimit.format('YYYY-MM-DD 00:00:00')
             ).shift();
             return doneTask != undefined ? doneTask.is_done : 0;

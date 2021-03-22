@@ -9,8 +9,8 @@
         <p>Name: {{ this.monster.name }}</p>
         <p>reword: {{ this.monster.reword }}</p>
         <p>dateLimit: {{ this.monster.dateLimit.format('YYYY-MM-DD') }}</p>
-        <p v-if="this.monster.is_done">done: true</p>
-        <p v-if="!this.monster.is_done">done: false</p>
+        <p v-if="this.monster.isDone">done: true</p>
+        <p v-if="!this.monster.isDone">done: false</p>
     </div>
 </template>
 
@@ -19,27 +19,25 @@ export default {
     props: ['monster'],
     data: function(){
         return {
-            is_active: false,
+            isActive: false,
             visibility: 'visibility: hidden;',
-            axios_data: {
-                tasks_id: this.monster.id,
-                date_limit: this.monster.dateLimit.format('YYYY-MM-DD')
+            axiosData: {
+                taskId: this.monster.taskId,
+                dateLimit: this.monster.dateLimit.format('YYYY-MM-DD')
             },
         }
     },
     methods: {
         switchVisibility: function() {
-            this.is_active = !this.is_active;
-            this.visibility = this.is_active ?
+            this.isActive   = !this.isActive;
+            this.visibility = this.isActive ?
             'visibility: visible;' : 'visibility: hidden;'
         },
         switchDone: async function() {
-            console.log('switchDone');
-            await axios.post('/done_task', this.axios_data)
+            await axios.post('/done_task', this.axiosData)
             .then(response => {
-                this.monster.is_done = response.data.is_done;
+                this.monster.isDone = response.data.isDone;
             }).catch(error => {
-                console.log(error);
             });
         }
     }

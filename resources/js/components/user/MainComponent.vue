@@ -21,7 +21,7 @@
         <taskmonsters-component
             :range="this.range"
             :tasks="this.tasks"
-            :done_tasks="this.doneTasks"
+            :doneTasks="this.doneTasks"
             ref="teskMonsters">
         </taskmonsters-component>
         </div>

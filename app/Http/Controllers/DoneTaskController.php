@@ -12,14 +12,14 @@ class DoneTaskController extends Controller
     public function post(Request $request) {
         $donetask = DoneTask::firstOrNew([
             'user_id'   => Auth::user()->id,
-            'task_id'   => $request->tasks_id,
-            'date_limit'=> $request->date_limit,
+            'task_id'   => $request->taskId,
+            'date_limit'=> $request->dateLimit,
         ]);
         $donetask->fill([
             'is_done'   => !($donetask->is_done),
             ])->save();
         return response([
-            'is_done'   => $donetask->is_done,
+            'isDone'   => $donetask->is_done,
         ]);
     }
 }
