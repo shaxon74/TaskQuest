@@ -3,29 +3,39 @@
     <a>タスクを登録</a>
     <div class="line"></div>
     <form class="task-form" action="/tasks/create" method="post">
-        <a>タスク名</a></br>
-        <a v-for="error in filt_error(0)">{{ error.message }}</a>
-        <input v-model="name" placeholder="名前を入力"></br>
-        <a>タスク種別</a></br>
-        <a v-for="error in filt_error(1)">{{ error.message }}</a>
+        <a>タスク名</a><br>
+        <a v-for="error in this.filt_error(0)" :key="error.index">{{ error.message }}</a>
+        <input v-model="name" placeholder="名前を入力"><br>
+        <a>タスク種別</a><br>
+        <a v-for="error in filt_error(1)" :key="error.index">{{ error.message }}</a>
         <select v-model="type">
-            <option v-for="option in options" v-bind:value="option.value">
+            <option v-for="option in options.type" :value="option.value" :key="option.index">
                 {{ option.text }}
             </option>
-        </select></br>
+        </select><br>
+        <div v-if="this.type == 2">
+            <a>曜日を設定</a><br>
+            <!-- <a v-for="error in filt_error(2)" :key="error.index">{{ error.message }}</br></a> -->
+            <select v-model="day" class="select-day">
+                <option v-for="option in options.week" :value="option.value" :key="option.index">
+                    {{ option.text }}
+                </option>
+            </select>
+            <a>曜日</a>
+        </div>
         <div v-if="this.type == 4">
-            <a>期限</a></br>
-            <a v-for="error in filt_error(2)">{{ error.message }}</br></a>
+            <a>期限</a><br>
+            <a v-for="error in filt_error(2)" :key="error.index">{{ error.message }}<br></a>
             <input class="input-year" v-model="year" placeholder="">
             <a>年</a>
             <input class="input-month" v-model="month" placeholder="">
             <a>月</a>
-            <input class="input-date" v-model="day" placeholder="">
+            <input class="input-date" v-model="date" placeholder="">
             <a>日</a>
         </div>
-        <a>報酬</a></br>
-        <a v-for="error in filt_error(3)">{{ error.message }}</a>
-        <input v-model="reword" placeholder="報酬額を入力"></br>
+        <a>報酬</a><br>
+        <a v-for="error in filt_error(3)" :key="error.index">{{ error.message }}</a>
+        <input v-model="reword" placeholder="報酬額を入力"><br>
     </form>
         <button class="button" v-on:click="this.submit">登録</button>
 </div>
@@ -39,15 +49,27 @@ export default {
             type: '',
             year: '',
             month: '',
-            day: '',
+            date: '',
+            day: 0,
             reword: '',
-            options: [
-                { text: 'タスク種別を選択', value: '' },
-                { text: 'デイリー', value: '1' },
-                { text: 'ウィークリー', value: '2' },
-                { text: 'マンスリー', value: '3' },
-                { text: '日付選択', value: '4' }
-            ],
+            options: {
+                type: [
+                    { text: 'タスク種別を選択', value: '' },
+                    { text: 'デイリー', value: '1' },
+                    { text: 'ウィークリー', value: '2' },
+                    { text: 'マンスリー', value: '3' },
+                    { text: '日付選択', value: '4' }
+                ],
+                week: [
+                    { text: '月', value: 1 },
+                    { text: '火', value: 2 },
+                    { text: '水', value: 3 },
+                    { text: '木', value: 4 },
+                    { text: '金', value: 5 },
+                    { text: '土', value: 6 },
+                    { text: '日', value: 7 },
+                ]
+            },
             errors: [],
         }
     },
@@ -55,15 +77,17 @@ export default {
         submit: function() {
             let dayjs = require('dayjs');
             let limit_date = '';
+            let day = 0;
             if (this.type == 4) {
                 limit_date = dayjs().year(this.year)
                     .month(this.month-1)
-                    .date(this.day)
+                    .date(this.date)
                     .format('YYYY-MM-DD');
             }
             let axiosData = {
                 name  : this.name,
                 type  : this.type,
+                day   : this.day,
                 limit : limit_date,
                 reword: this.reword,
             };
@@ -144,6 +168,9 @@ export default {
         }
         .input-month, .input-date {
             width: 24px;
+        }
+        .select-day {
+            width: 38px;
         }
         .button {
             width: auto;

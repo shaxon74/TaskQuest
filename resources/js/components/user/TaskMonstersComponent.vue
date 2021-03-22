@@ -58,6 +58,7 @@ export default {
                     }   // endif
                 }); // endforeach
             }   // endfor
+            console.log(this.monsters);
         },  // endfunction
         setDateLimit: function(task, dateCurrent) {
             let dayjs = require('dayjs');
@@ -65,9 +66,11 @@ export default {
             switch(task.type){
                 case 1: dateLimitRet = dateCurrent;
                 break;
-                case 2: dateLimitRet = dateCurrent.day() == 0 ?
-                            dateCurrent :
-                            dateCurrent.endOf('week').add(1, 'day');
+                case 2:
+                    dateLimitRet = 
+                    dateCurrent.day() == 0 && task.day == 7 ?
+                    dateCurrent :
+                    dateCurrent.startOf('week').add(task.day, 'day');
                 break;
                 case 3: dateLimitRet = dateCurrent.endOf('month');
                 break;
