@@ -26,12 +26,12 @@
         </taskmonsters-component>
         </div>
     </div>
-    <tasks-component v-on:addTask="this.updateMonsters">
-    </tasks-component>
     <edittasks-component
         v-on:updateTask="this.updateMonsters"
         :tasks="this.tasks">
     </edittasks-component>
+    <tasks-component v-on:addTask="this.updateMonsters">
+    </tasks-component>
 </div>
 </template>
 
@@ -85,9 +85,11 @@ export default {
 
 <style lang="scss">
 .main-component {
-    // margin-top: 0;
+    margin: 10px;
     .scroll {
         overflow-x: scroll;
+        border: 9px double #ddd;
+        border-radius: 10px 10px 10px 10px;
         .field {
             height: 350px;
             background-color: #296;

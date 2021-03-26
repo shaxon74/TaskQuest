@@ -142,16 +142,16 @@ export default {
 
 <style lang="scss">
 .tasks {
-    margin: 10px 0;
+    margin-top: 10px;
     padding: 10px;
     width: 400px;
     font-size: 1.8rem;
-    color: #333;
-    border: 2px solid #bbb;
-    border-radius:10px;
+    color: #FFF;
+    border: 9px double #ddd;
+    border-radius: 10px 10px 10px 10px;
     .line {
         height: 0;
-        border-top: 1px solid #666;
+        border-top: 3px solid #888;
     }
     .task-form {
         a {

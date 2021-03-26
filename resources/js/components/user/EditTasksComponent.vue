@@ -1,25 +1,17 @@
 <template>
 <div class="edit-tasks">
-    <h2>タスク一覧</h2>
     <table class="task-list">
-        <tr class="list-title">
-            <th class=title-content>id</th>
-            <th class=title-content>name</th>
-            <th class=title-content>type</th>
-            <th class=title-content>reword</th>
-            <th class=title-content>limit</th>
-        </tr>
-        <tr class="list-item" v-for="task in futureTasks" v-bind:key="task.id">
-            <td :style="style.item">{{ task.id }}</td>
-            <td :style="style.item">{{ task.name }}</td>
-            <td :style="style.item">{{ task.type }}</td>
-            <td :style="style.item">{{ task.reword }}</td>
-            <td :style="style.item">{{ task.limit }}</td>
-            <td>
-                <button class="button" v-on:click="1">更新</button>
-                <button class="button" v-on:click="deleteTasks(task.id)">削除</button>
-            </td>
-        </tr>
+        <a>タスク一覧</a>
+        <div class="line"></div>
+        <div class="list-item" v-for="task in futureTasks" v-bind:key="task.id">
+            <a class="name" :style="style.item">{{ task.name }}</a>
+            <a class="reword" :style="style.item">報酬:{{ task.reword }}G</a>
+            <a class="limit" :style="style.item">{{ typeString(task) }}</a>
+            <div class="button">
+                <button v-on:click="1">更新</button>
+                <button v-on:click="deleteTasks(task.id)">削除</button>
+            </div>
+        </div>
     </table>
 </div>
 </template>
@@ -38,7 +30,6 @@ export default {
                     display: 'default'
                 },
             },
-            
         }
     },
     methods: {
@@ -53,6 +44,35 @@ export default {
                 console.log(error);
             });
         },
+        typeString: function(task) {
+            let dayjs = require('dayjs');
+            let limit = '';
+            let type = [
+                { text: 'デイリー', value: 1 },
+                { text: '毎週', value: 2 },
+                { text: '月末', value: 3 },
+                { text: '', value: 4 }
+            ];
+            let week = [
+                { text: '月', value: 1 },
+                { text: '火', value: 2 },
+                { text: '水', value: 3 },
+                { text: '木', value: 4 },
+                { text: '金', value: 5 },
+                { text: '土', value: 6 },
+                { text: '日', value: 7 },
+            ];
+            switch(task.type) {
+                case 2:
+                    limit = week.find( w => w.value === task.day ).text + '曜日';
+                break;
+                case 4:
+                    limit = dayjs(task.limit).format('YYYY/MM/DD');
+                break;
+            };
+            return type.find( t => t.value === task.type ).text
+            + limit;
+        }
     },
     computed: {
         futureTasks: function() {
@@ -61,8 +81,7 @@ export default {
                 return task.limit == null
                 || dayjs().isBefore(dayjs(task.limit))
                 || dayjs().isSame(dayjs(task.limit));
-            }
-            )
+            });
         }
     }
 }
@@ -70,23 +89,48 @@ export default {
 
 <style lang="scss">
 .task-list {
-    border: 1px solid #000; 
-    .list-title {
-        width: 100%;
-        // display:flex;
-        padding:0px;
-    .title-content {
-        // width:  80px;
-        height: 40px;
-        background:orange;
-        text-align: center;
-        border-right:1px solid #ddd;
-        font-size: 1.8rem;
-        padding: 0 10px;
-        &:last-child {
-            border-right: none;
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 9px double #ddd; 
+    border-radius: 10px 10px 10px 10px;
+    font-size: 1.8rem;
+    color: #fff;
+    .line {
+        height: 0;
+        border-top: 3px solid #888;
+    }
+    .list-item {
+        margin-top: 10px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid #fff;
+        display: flex;
+        .name {
+            margin-top:auto;
+            width: 40%;
+            font-size: 2rem;
         }
-    }    
+        .reword {
+            margin-top:auto;
+            width: 20%;
+            min-width: 90px;
+            font-size: 1.6rem;
+        }
+        .limit {
+            margin-top:auto;
+            width: 20%;
+            min-width: 110px;
+            font-size: 1.6rem;
+        }
+        .button {
+            margin-top:auto;
+            margin-bottom:auto;
+            width: 20%;
+            text-align: right;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
     }
 }
 </style>
