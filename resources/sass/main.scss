@@ -46,6 +46,51 @@ body {
     
     .main {
         margin: 0px;
+        .card {
+            margin-top: 10px;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 10px;
+            width: 400px;
+            font-size: 1.8rem;
+            color: #fff;
+            border: 9px double #ddd;
+            border-radius: 10px 10px 10px 10px;
+            .card-header {
+                font-size: 1.6rem;
+                // height: 0;
+                border-bottom: 3px solid #888;
+            }
+            // .line {
+            //     height: 0;
+            //     border-top: 3px solid #888;
+            // }
+            label, a {
+                font-size: 1.4rem;
+            }
+            input {
+                width: 100%;
+            }
+            select {
+                width: 100%;
+            }
+            .button {
+                width: auto;
+                margin-top: 10px;
+            }
+            .form-check-input {
+                width: auto;
+            }
+            .link {
+                color: #fff;
+                text-decoration: underline;
+                font-size: 1.4rem;
+            }
+            .errors {
+                font-size: 1.2rem;
+                background-color: #faa
+            }
+        }
     }
     .footer {
         margin-top: 10px;

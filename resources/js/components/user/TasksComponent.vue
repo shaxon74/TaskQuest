@@ -1,43 +1,52 @@
 <template>
-<div class="tasks">
-    <a>タスクを登録</a>
-    <div class="line"></div>
-    <form class="task-form" action="/tasks/create" method="post">
-        <a>タスク名</a><br>
-        <a v-for="error in this.filt_error(0)" :key="error.index">{{ error.message }}</a>
-        <input v-model="name" placeholder="名前を入力"><br>
-        <a>タスク種別</a><br>
-        <a v-for="error in filt_error(1)" :key="error.index">{{ error.message }}</a>
-        <select v-model="type">
-            <option v-for="option in options.type" :value="option.value" :key="option.index">
-                {{ option.text }}
-            </option>
-        </select><br>
-        <div v-if="this.type == 2">
-            <a>曜日を設定</a><br>
-            <!-- <a v-for="error in filt_error(2)" :key="error.index">{{ error.message }}</br></a> -->
-            <select v-model="day" class="select-day">
-                <option v-for="option in options.week" :value="option.value" :key="option.index">
-                    {{ option.text }}
-                </option>
-            </select>
-            <a>曜日</a>
-        </div>
-        <div v-if="this.type == 4">
-            <a>期限</a><br>
-            <a v-for="error in filt_error(2)" :key="error.index">{{ error.message }}<br></a>
-            <input class="input-year" v-model="year" placeholder="">
-            <a>年</a>
-            <input class="input-month" v-model="month" placeholder="">
-            <a>月</a>
-            <input class="input-date" v-model="date" placeholder="">
-            <a>日</a>
-        </div>
-        <a>報酬</a><br>
-        <a v-for="error in filt_error(3)" :key="error.index">{{ error.message }}</a>
-        <input v-model="reword" placeholder="報酬額を入力"><br>
-    </form>
-        <button class="button" v-on:click="this.submit">登録</button>
+<div class="card tasks">
+    <div class="card-header">タスクを登録</div>
+    <div class="card-body">
+        <form class="task-form" action="/tasks/create" method="post">
+            <div>
+                <label for="name">タスク名</label>
+                <a v-for="error in this.filt_error(0)" :key="error.index">{{ error.message }}</a>
+                <input id="name" v-model="name" placeholder="名前を入力">
+            </div>
+
+            <div>
+                <label for="type">タスク種別/期限</label>
+                <a v-for="error in filt_error(1)" :key="error.index">{{ error.message }}</a>
+                <select v-model="type">
+                    <option v-for="option in options.type" :value="option.value" :key="option.index">
+                        {{ option.text }}
+                    </option>
+                </select><br>
+
+                <div v-if="this.type == 2">
+                    <label for="day">曜日を設定</label><br>
+                    <!-- <a v-for="error in filt_error(2)" :key="error.index">{{ error.message }}</br></a> -->
+                    <select v-model="day" class="select-day">
+                        <option v-for="option in options.week" :value="option.value" :key="option.index">
+                            {{ option.text }}
+                        </option>
+                    </select>
+                    <a>曜日</a>
+                </div>
+
+                <div v-if="this.type == 4">
+                    <a>期限</a><br>
+                    <a v-for="error in filt_error(2)" :key="error.index">{{ error.message }}<br></a>
+                    <input class="input-year" v-model="year" placeholder="">
+                    <a>年</a>
+                    <input class="input-month" v-model="month" placeholder="">
+                    <a>月</a>
+                    <input class="input-date" v-model="date" placeholder="">
+                    <a>日</a>
+                </div>
+            </div>
+
+            <label>報酬</label>
+            <a v-for="error in filt_error(3)" :key="error.index">{{ error.message }}</a>
+            <input v-model="reword" placeholder="報酬額を入力"><br>
+            <button class="button" v-on:click="this.submit">登録</button>
+        </form>
+    </div>
 </div>
 </template>
 
@@ -142,27 +151,14 @@ export default {
 
 <style lang="scss">
 .tasks {
-    margin-top: 10px;
-    padding: 10px;
-    width: 400px;
-    font-size: 1.8rem;
-    color: #FFF;
-    border: 9px double #ddd;
-    border-radius: 10px 10px 10px 10px;
-    .line {
-        height: 0;
-        border-top: 3px solid #888;
-    }
+    // margin-top: 10px;
+    // padding: 10px;
+    // width: 400px;
+    // font-size: 1.8rem;
+    // color: #FFF;
+    // border: 9px double #ddd;
+    // border-radius: 10px 10px 10px 10px;
     .task-form {
-        a {
-            font-size: 1.6rem;
-        }
-        input {
-            width: 100%;
-        }
-        select {
-            width: 100%;
-        }
         .input-year {
             width: 38px;
         }
@@ -171,15 +167,6 @@ export default {
         }
         .select-day {
             width: 38px;
-        }
-        .button {
-            width: auto;
-            margin-top: 10px;
-        }
-        .errors {
-            font-size: 1.2rem;
-            background-color: #faa
-
         }
     }
 }
