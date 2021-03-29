@@ -1,8 +1,14 @@
 <template>
 <div class="main-component">
-    <div class="scroll">
-        <div class="field" :style="this.style">
-            <div class="my-area">
+    <div class="app-display clearfix">
+        <div class="scroll">
+            <div class="field" :style="this.style">
+                <entities-component
+                    :range="this.range"
+                    :tasks="this.tasks"
+                    :doneTasks="this.doneTasks"
+                    ref="teskMonsters">
+                </entities-component>
                 <div class="range-menu">
                     <a class="menu-top" v-on:click="switchRangeMenu">
                         範囲:{{ this.range }}日間
@@ -12,18 +18,9 @@
                         <li v-on:click="changeRange(30)">1ヶ月</li>
                     </ul>
                 </div>
-                <div class="hero">
-                    <button v-on:click="this.switchMyMenu">open</button>
-                    <mymenu-component ref="myMenu">
-                    </mymenu-component>
-                </div>
             </div>
-        <taskmonsters-component
-            :range="this.range"
-            :tasks="this.tasks"
-            :doneTasks="this.doneTasks"
-            ref="teskMonsters">
-        </taskmonsters-component>
+        </div>
+        <div class="menu">
         </div>
     </div>
     <edittasks-component
@@ -73,9 +70,6 @@ export default {
             await this.getTasks();
             this.$refs.teskMonsters.createMonsters(this.range, this.tasks, this.doneTasks);
         },
-        switchMyMenu: function(){
-            this.$refs.myMenu.switch();
-        },
         setStyle: function(inRange){
             this.style = 'width: ' + (inRange*120 + 200 + 250) + 'px;';
         }
@@ -85,26 +79,27 @@ export default {
 
 <style lang="scss">
 .main-component {
-    margin: 10px;
-    .scroll {
-        overflow-x: scroll;
-        border: 9px double #ddd;
-        border-radius: 10px 10px 10px 10px;
-        .field {
-            height: 350px;
-            background-color: #296;
-            display: flex;
-            .my-area {
-                position: relative;
-                width: 250px;
+    .app-display {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        .scroll {
+            width: 100%;
+            overflow-x: scroll;
+            border: 9px double #ddd;
+            border-radius: 10px 10px 10px 10px;
+            .field {
                 height: 350px;
-                background-color: #944;
+                background-color: #296;
+                position: relative;
                 .range-menu {
-                    position: absolute;
                     color: black;
                     text-align: center;
                     font-size: 16px;
                     border:2px solid #333;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
                     .menu-top {
                         display: inline-block;
                         width: 150px;
@@ -122,16 +117,18 @@ export default {
                         border-bottom:2px solid #fff;
                     }
                 }
-                .hero {
-                    position: absolute;
-                    top: 200px;
-                    left: 150px;
-                    width: 50px;
-                    height: 50px;
-                    background-color: #368;
-                    position: relative;
-                }
             }
+        }
+        .menu {
+            width: 200px;
+            height: 350px;
+            // display: none;
+            background-color: #555;
+            opacity: 0.5;
+            position: absolute;
+            top: 9px;
+            left: 9px;
+            // left: calc(100% - 210px);
         }
     }
 }

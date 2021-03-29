@@ -1,5 +1,10 @@
 <template>
     <div class="TaskMonsters">
+        <div class="hero">
+            <button v-on:click="this.switchMyMenu">open</button>
+            <mymenu-component ref="myMenu">
+            </mymenu-component>
+        </div>
         <monster-component
             v-for="monster in monsters"
             :key=monster.key
@@ -82,17 +87,26 @@ export default {
             ).shift();
             return doneTask != undefined ? doneTask.is_done : 0;
         },
+        switchMyMenu: function(){
+            this.$refs.myMenu.switch();
+        },
     }   // endmethods
 }
 </script>
 
 <style lang="scss">
     .TaskMonsters {
+        width: 100%;
+        height: 350px;
         position: relative;
-        background-color: rgb(44, 153, 138);
     }
-    .dbg {
-        background: #814;
-        margin-left: 100px;
+    .hero {
+        position: absolute;
+        top: 200px;
+        left: 150px;
+        width: 50px;
+        height: 50px;
+        background-color: #368;
+        position: relative;
     }
 </style>

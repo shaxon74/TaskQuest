@@ -25,7 +25,7 @@ export default {
     methods: {
         setStyle: function(){
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
-            let positionLeft = 40
+            let positionLeft = 240
                 + this.monster.dateLimit.diff(dayjs().subtract(1,'day'), 'day') * 120
                 + Math.floor((this.monster.numPerDay)/5, 0) * 60
                 - this.monster.numPerDay * 5;
