@@ -7,7 +7,7 @@
         </div>
         <monster-component
             v-for="monster in monsters"
-            :key=monster.key
+            :key="monster.id"
             :monster="monster">
         </monster-component>
     </div>
@@ -29,36 +29,39 @@ export default {
     methods: {
         createMonsters: function(daysLength, tasks, doneTasks){
             // Axiosでレコードを取出す。
+            let id = 0;
+            let numPerDay = 0;
             let dayjs = require('dayjs');   // day.jsライブラリの呼出し
-            let today = dayjs();
             let dateCurrent = dayjs();      // for文でターゲットとしている日付
             let dateLimit = dayjs();        // task.typeから判定したタスク期限
-            let id = 0;
-            let numPerDay;
+            let taskMap = [];
             this.monsters = [];
             if (tasks.length == 0) return;
             // 表示する日付長だけmonsterデータを作成する。
             for(let cnt = 0; cnt < daysLength; cnt++) {
                 numPerDay = 0;
-                dateCurrent = today.add(cnt, 'day').startOf('day');
-                tasks.forEach( task => {
-                    dateLimit = this.setDateLimit(task, dateCurrent)
-                                    .startOf('day');
-                    // taskからmonster連想配列を生成しmonsters配列にpushする。
-                    if( dateLimit.isSame(dateCurrent) ){
-                        this.monsters.push({
+                dateCurrent = dayjs().add(cnt, 'day').startOf('day');
+                this.monsters = this.monsters.concat(
+                    // tasksからdateCurrent日付のタスクをフィルターし、日付に対するmonsterを生成する。
+                    tasks.filter(task => 
+                        this.setDateLimit(task, dateCurrent)
+                        .startOf('day')
+                        .isSame(dateCurrent)
+                    ).map( task => {
+                        taskMap = {
+                            'id'        : id,
                             'taskId'    : task.id,
                             'name'      : task.name,
                             'reword'    : task.reword,
-                            'id'        : id,
-                            'dateLimit' : dateLimit,
+                            'dateLimit' : this.setDateLimit(task, dateCurrent).startOf('day'),
                             'numPerDay' : numPerDay,
                             'isDone'    : this.setDoneTask(doneTasks, task.id, dateLimit)
-                        });
+                        };
                         id++;
                         numPerDay++;
-                    }   // endif
-                }); // endforeach
+                        return taskMap;
+                    }) // endmap
+                );
             }   // endfor
         },  // endfunction
         setDateLimit: function(task, dateCurrent) {
@@ -81,7 +84,8 @@ export default {
             return dateLimitRet;
         },
         setDoneTask: function(doneTasks, taskId, dateLimit){
-            const doneTask = doneTasks.filter(item =>
+            const doneTask = 
+            doneTasks.filter(item =>
                 item.task_id === taskId
                 && item.date_limit === dateLimit.format('YYYY-MM-DD 00:00:00')
             ).shift();

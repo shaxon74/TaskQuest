@@ -12,13 +12,15 @@ const mix = require('laravel-mix');
  */
 
 mix
-    // .webpackConfig({
-    //     devServer: {
-    //         proxy: {
-    //             '*':'http://localhost:80'
-    //         }
-    //     }
-    // })
     .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
+    // ホストからdockerにアクセス
+    .webpackConfig({
+      devServer: {
+        host: '0.0.0.0',
+        proxy: {
+          '*': 'http://localhost:8000'
+        }
+      }
+    })
 ;

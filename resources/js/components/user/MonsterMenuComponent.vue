@@ -28,9 +28,8 @@ export default {
         }
     },
     methods: {
-        switchVisibility: function() {
-            this.isActive   = !this.isActive;
-            this.visibility = this.isActive ?
+        switchVisibility: function(isHovered) {
+            this.visibility = isHovered ?
             'visibility: visible;' : 'visibility: hidden;'
         },
         switchDone: async function() {

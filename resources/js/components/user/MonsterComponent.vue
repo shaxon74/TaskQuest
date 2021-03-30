@@ -1,6 +1,8 @@
 <template>
-    <div class="monster" :style="style">
-        <button v-on:click="this.switchMonsterMenu">open</button>
+    <div class="monster"
+    :style="style"
+    v-on:mouseover="switchMonsterMenu(true)"
+    v-on:mouseleave="switchMonsterMenu(false)">
         <monstermenu-component
             ref="monsterMenu"
             :monster="monster">
@@ -36,9 +38,10 @@ export default {
             let styleTop  = 'top: '  + positionTop  + 'px;';
             this.style    = styleLeft + styleTop;
         },
-        switchMonsterMenu: function(){
-            this.$refs.monsterMenu.switchVisibility();
-        }
+        switchMonsterMenu: function(isActive){
+            this.$refs.monsterMenu.switchVisibility(isActive);
+            // this.$emit('monsterMenu', this.monster);
+        },
     }
 }
 </script>

@@ -66,12 +66,12 @@ export default {
         switchRangeMenu: function(){
             this.rangeMenuIsActive = !(this.rangeMenuIsActive);
         },
+        setStyle: function(inRange){
+            this.style = 'width: ' + (inRange*120 + 200 + 250) + 'px;';
+        },
         updateMonsters: async function() {
             await this.getTasks();
             this.$refs.teskMonsters.createMonsters(this.range, this.tasks, this.doneTasks);
-        },
-        setStyle: function(inRange){
-            this.style = 'width: ' + (inRange*120 + 200 + 250) + 'px;';
         }
     }
 }
