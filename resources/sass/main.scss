@@ -7,17 +7,27 @@ body {
         text-align: center;
         background-color: #4bf;
         .logo {
-            // ロゴ画像サイズに合わせる。
-            width: 224px;
+            width: 300px;
             height: 56px;
-            background-image: url('/images/logo.png');
-            background-size:  cover;
-            // 要素を中央揃え
             margin: auto;
-            // テキストを非表示
-            text-indent: 100%;
-            white-space: nowrap;
-            overflow: hidden;
+            padding: 5px;
+            a {
+                font-size: 4.4rem;
+                color: #000;
+                font-stretch: 50%;
+                font-weight:bold;
+            }
+        //     // ロゴ画像サイズに合わせる。
+        //     width: 224px;
+        //     height: 56px;
+        //     background-image: url('/images/logo.png');
+        //     background-size:  cover;
+        //     // 要素を中央揃え
+        //     margin: auto;
+        //     // テキストを非表示
+        //     text-indent: 100%;
+        //     white-space: nowrap;
+        //     overflow: hidden;
         }
         .header-menu {
             background: rgba(255, 255, 255, 0.2);
@@ -29,7 +39,7 @@ body {
                     width: 100px;
                     height: 40px;
                     margin: 0 0;
-                    padding: 9px 0px;
+                    padding: 12px 0px;
                     display: inline-block;
                     font-size: 1.6rem;
                     color: black;

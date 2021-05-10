@@ -7,12 +7,13 @@
                     :range="this.range"
                     :tasks="this.tasks"
                     :doneTasks="this.doneTasks"
-                    ref="teskMonsters">
+                    ref="teskMonsters"
+                    v-on:displayMonsterInfo="displayMonsterInfo">
                 </entities-component>
                 <div class="range-menu">
-                    <a class="menu-top" v-on:click="switchRangeMenu">
+                    <p class="menu-top" v-on:click="switchRangeMenu">
                         範囲:{{ this.range }}日間
-                    </a>
+                    </p>
                     <ul v-if="this.rangeMenuIsActive">
                         <li v-on:click="changeRange(7)">7日間</li>
                         <li v-on:click="changeRange(30)">1ヶ月</li>
@@ -20,7 +21,14 @@
                 </div>
             </div>
         </div>
-        <div class="menu">
+        <div class="monster-info"v-show="monsterInfoisActive">
+            <div class="card card-fix">
+                <p class="card-header">{{ this.monsterInfo.name }}</p>
+                <p class="card-body">報酬: {{ this.monsterInfo.reword }}</p>
+                <p class="card-body">期限: {{ this.monsterInfo.dateLimit }}</p>
+                <!-- <p class="card-body" v-if="this.monsterInfo.isDone">done: true</p>
+                <p class="card-body" v-if="!this.monsterInfo.isDone">done: false</p> -->
+            </div>
         </div>
     </div>
     <edittasks-component
@@ -40,11 +48,14 @@ export default {
             rangeMenuIsActive: false,
             tasks: [],
             doneTasks: [],
-            style: 'width: 1290px;',
+            monsterInfo: [],
+            monsterInfoisActive: false,
+            style: 'width: 0px;',
         }
     },
     mounted: function(){
         this.updateMonsters();
+        this.setStyle(this.range);
     },
     methods: {
         getTasks: async function() {
@@ -67,11 +78,25 @@ export default {
             this.rangeMenuIsActive = !(this.rangeMenuIsActive);
         },
         setStyle: function(inRange){
-            this.style = 'width: ' + (inRange*120 + 200 + 250) + 'px;';
+            this.style = 'width: ' + (inRange*120 + 200) + 'px;';
         },
         updateMonsters: async function() {
             await this.getTasks();
             this.$refs.teskMonsters.createMonsters(this.range, this.tasks, this.doneTasks);
+        },
+        displayMonsterInfo: function(isActive, monster) {
+            let dayjs = require('dayjs');
+            if (isActive) {
+                this.monsterInfo = monster;
+                this.monsterInfo.dateLimit = 
+                    dayjs(this.monsterInfo.dateLimit).format('YYYY-MM-DD');
+            }else {
+                this.monsterInfo = [];
+            }
+            this.monsterInfoisActive = isActive;
+        },
+        fotmat: function(date) {
+            let dayjs = require('dayjs');
         }
     }
 }
@@ -104,7 +129,8 @@ export default {
                         display: inline-block;
                         width: 150px;
                         height: 40px;
-                        padding-top: 6px;
+                        margin: 0;
+                        padding: 9px;
                         background-color: #bbb;
                         border-top:2px solid #fff;
                         border-bottom:2px solid #fff;
@@ -112,23 +138,33 @@ export default {
                     ul li{
                         width: 150px;
                         height: 40px;
-                        padding-top: 6px;
+                        padding-top: 9px;
                         background-color: #bbb;
                         border-bottom:2px solid #fff;
                     }
                 }
             }
         }
-        .menu {
+        .monster-info {
             width: 200px;
             height: 350px;
             // display: none;
-            background-color: #555;
-            opacity: 0.5;
+            background-color: rgba(3, 3, 3, 0.5);
             position: absolute;
             top: 9px;
             left: 9px;
             // left: calc(100% - 210px);
+            padding: 50px 5px 0px 5px;
+            .card-fix {
+                width: 100%;
+                opacity: 8;
+                border: 6px double #bbb;
+            background-color: #333;
+                font-size: 1.4rem;
+                p {
+                    color: #fff;
+                }
+            }
         }
     }
 }

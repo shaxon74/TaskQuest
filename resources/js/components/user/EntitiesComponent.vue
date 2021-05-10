@@ -8,7 +8,8 @@
         <monster-component
             v-for="monster in monsters"
             :key="monster.id"
-            :monster="monster">
+            :monster="monster"
+            v-on:throwMonsterInfo="throwMonsterInfo">
         </monster-component>
     </div>
 </template>
@@ -94,6 +95,9 @@ export default {
         switchMyMenu: function(){
             this.$refs.myMenu.switch();
         },
+        throwMonsterInfo: function(isActive, monster) {
+            this.$emit('displayMonsterInfo', isActive, monster);
+        }
     }   // endmethods
 }
 </script>

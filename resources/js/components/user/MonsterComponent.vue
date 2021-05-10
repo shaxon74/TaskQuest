@@ -1,12 +1,8 @@
 <template>
     <div class="monster"
     :style="style"
-    v-on:mouseover="switchMonsterMenu(true)"
-    v-on:mouseleave="switchMonsterMenu(false)">
-        <monstermenu-component
-            ref="monsterMenu"
-            :monster="monster">
-        </monstermenu-component>
+    v-on:mouseover="switchMonsterMenu(true, monster)"
+    v-on:mouseleave="switchMonsterMenu(false, monster)">
     </div>
 </template>
 
@@ -38,9 +34,9 @@ export default {
             let styleTop  = 'top: '  + positionTop  + 'px;';
             this.style    = styleLeft + styleTop;
         },
-        switchMonsterMenu: function(isActive){
-            this.$refs.monsterMenu.switchVisibility(isActive);
-            // this.$emit('monsterMenu', this.monster);
+        switchMonsterMenu: function(isActive, monster){
+            // this.$refs.monsterMenu.switchVisibility(isActive);
+            this.$emit('throwMonsterInfo', isActive, monster);
         },
     }
 }

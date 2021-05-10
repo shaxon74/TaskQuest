@@ -19,7 +19,7 @@ mix
       devServer: {
         host: '0.0.0.0',
         proxy: {
-          '*': 'http://localhost:8000'
+          '*': '0.0.0.0:8000'
         }
       }
     })
