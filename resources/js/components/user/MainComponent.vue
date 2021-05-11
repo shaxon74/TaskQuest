@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="monster-info"v-show="monsterInfoisActive">
+        <div class="monster-info" v-show="monsterInfoisActive">
             <div class="card card-fix">
                 <p class="card-header">{{ this.monsterInfo.name }}</p>
                 <p class="card-body">報酬: {{ this.monsterInfo.reword }}</p>

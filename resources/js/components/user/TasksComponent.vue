@@ -44,7 +44,7 @@
             <label>報酬</label>
             <a v-for="error in filt_error(3)" :key="error.index">{{ error.message }}</a>
             <input v-model="reword" placeholder="報酬額を入力"><br>
-            <button class="button" v-on:click="this.submit">登録</button>
+            <button class="button" type="button" v-on:click="this.submit">登録</button>
         </form>
     </div>
 </div>
